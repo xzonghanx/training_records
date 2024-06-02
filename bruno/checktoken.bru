@@ -1,0 +1,22 @@
+meta {
+  name: checktoken
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/api/users/check-token
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2NDE4MDRmODY2NWVmMGE0ZTAwNjA2MyIsIm5hbWUiOiJ6b25nIiwiZW1haWwiOiJ6aEBob3RtYWlsIiwiY3JlYXRlZEF0IjoiMjAyNC0wNS0xM1QwMjo1MTo1OS44NzdaIiwidXBkYXRlZEF0IjoiMjAyNC0wNS0xM1QwMjo1MTo1OS44NzdaIiwiX192IjowfSwiaWF0IjoxNzE1NjY4MDc1LCJleHAiOjE3MTU2NjkyNzV9.yjKvc1wkbQD2fffADPaFA2oiXzbVcmaOvFKYb5IZ3_o
+}
+
+body:json {
+  {
+    "email":"zh@hotmail",
+    "password":"gongxifacai"
+  }
+}
