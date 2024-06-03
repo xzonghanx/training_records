@@ -1,4 +1,5 @@
 const pool = require("../../config/database");
+const debug = require("debug")("pern:controllers:api:personnelController");
 
 //can choose to select only specific fields instead.
 const index = async (req, res) => {
@@ -49,6 +50,31 @@ const create = async (req, res) => {
 	}
 };
 
+const edit = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const { name, nric, unit, ord, vocation, team, service } = req.body;
+		const query = `
+		UPDATE personnel SET 
+		name = $2,
+		nric = $3,
+		unit = $4,
+		ord = $5,
+		service = $6,
+		vocation = $7,
+		team = $8
+		WHERE person_id=$1 
+		RETURNING *`;
+		const values = [id, name, nric, unit, ord, service, vocation, team];
+		debug("values %s", values);
+		const result = await pool.query(query, values);
+		res.status(201).json(result.rows[0]);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
 //change update ORD to just by date for all, and auto if possible, instead of by batch/team; can use nodejs cron.
 const updateORD = async (req, res) => {
 	try {
@@ -75,5 +101,6 @@ module.exports = {
 	create,
 	index,
 	show,
+	edit,
 	updateORD,
 };

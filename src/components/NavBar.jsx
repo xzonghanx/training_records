@@ -9,9 +9,9 @@ export default function NavBar({ setUser }) {
 
 	return (
 		<nav>
-			<NavLink to='/orders'>Order History</NavLink>
+			<NavLink to='/personnel'>Personnel Overview</NavLink>
 			&nbsp; | &nbsp;
-			<NavLink to='/orders/new'>New Order</NavLink>
+			<NavLink to='/authorisation'>Authorise Records</NavLink>
 			&nbsp; | &nbsp;
 			<NavLink to='' onClick={handleLogout}>
 				Logout

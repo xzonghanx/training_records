@@ -44,14 +44,14 @@ export default function PersonnelDetailsPage() {
 				</thead>
 				<tbody>
 					<tr>
-						<td>{personnel[0].person_id}</td>
-						<td>{personnel[0].name}</td>
-						<td>{personnel[0].nric}</td>
-						<td>{personnel[0].unit}</td>
-						<td>{personnel[0].ord}</td>
-						<td>{personnel[0].service}</td>
-						<td>{personnel[0].vocation}</td>
-						<td>{personnel[0].team}</td>
+						<td>{personnel[0]?.person_id}</td>
+						<td>{personnel[0]?.name}</td>
+						<td>{personnel[0]?.nric}</td>
+						<td>{personnel[0]?.unit}</td>
+						<td>{new Date(personnel[0]?.ord).toLocaleDateString()}</td>
+						<td>{personnel[0]?.service}</td>
+						<td>{personnel[0]?.vocation}</td>
+						<td>{personnel[0]?.team}</td>
 						<td>{personnel[0]?.q_code}</td>
 						<td>{personnel[0]?.q_date}</td> {/*need to change to latest date*/}
 						<td>CL X </td> {/*need to change to derive CL based on latest Q date*/}

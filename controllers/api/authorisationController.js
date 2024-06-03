@@ -1,4 +1,5 @@
 const pool = require("../../config/database");
+// const debug = require("debug")("pern:controllers:api:authorisationController");
 
 //assume that only instructor can create records, and hence immediately signs off --> check&balance
 // * delink the signing portion, all supervisors can create.

@@ -15,7 +15,7 @@ export default function LoginForm({ setUser }) {
 		const { email, password } = data;
 		const user = await login(email, password);
 		setUser(user);
-		navigate("/orders"); //TODO change this route
+		navigate("/personnel");
 	};
 
 	return (

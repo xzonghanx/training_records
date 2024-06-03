@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { fetchAllPersonnel } from "../../utilities/personnel-service";
 
 import debug from "debug";
@@ -29,7 +29,12 @@ export default function PersonnelOverviewPage() {
 
 	return (
 		<>
-			<h1>PersonnelOverview page</h1>
+			<h1>Personnel Overview page</h1>
+
+			<div>
+				<Link to='/personnel/new'>Create New Personnel</Link>
+			</div>
+
 			<table>
 				<thead>
 					<tr>
@@ -56,12 +61,13 @@ export default function PersonnelOverviewPage() {
 							<td>{person.name}</td>
 							<td>{person.nric}</td>
 							<td>{person.unit}</td>
-							<td>{person.ord}</td>
+							<td>{new Date(person?.ord).toLocaleDateString()}</td>
 							<td>{person.service}</td>
 							<td>{person.vocation}</td>
 							<td>{person.team}</td>
 							<td>{person?.q_code}</td>
-							<td>{person?.q_date}</td> {/*need to change to latest date*/}
+							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>{" "}
+							{/*need to change to latest date*/}
 							<td>CL X</td> {/*need to change to derive CL based on latest Q date*/}
 						</tr>
 					))}
