@@ -1,8 +1,8 @@
 import { login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
 
-import debug from "debug";
-const log = debug("pern:components:LoginForm");
+// import debug from "debug";
+// const log = debug("pern:components:LoginForm");
 
 export default function LoginForm({ setUser }) {
 	const navigate = useNavigate();
@@ -11,13 +11,11 @@ export default function LoginForm({ setUser }) {
 		evt.preventDefault();
 		const formData = new FormData(evt.target);
 		const data = Object.fromEntries(formData);
-		log("data %o:", data);
-		//destructure the email & password from data
+		// log("data %o:", data);
 		const { email, password } = data;
-		//pass into login function in users-service
 		const user = await login(email, password);
 		setUser(user);
-		navigate("/orders");
+		navigate("/orders"); //TODO change this route
 	};
 
 	return (

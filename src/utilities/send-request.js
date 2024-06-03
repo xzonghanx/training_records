@@ -1,5 +1,3 @@
-//* refactor from users-api
-
 import { getToken } from "./users-service";
 
 export default async function sendRequest(url, method = "GET", payload = null) {
@@ -12,16 +10,22 @@ export default async function sendRequest(url, method = "GET", payload = null) {
 	}
 
 	const token = getToken();
-	//ensure that headers object exist
 	if (token) {
-		//add token to an authorization header
-		// prefacing w 'Bearer'
 		options.headers = options.headers || {};
 		options.headers.Authorization = `Bearer ${token}`;
 	}
 
-	const res = await fetch(url, options);
-	// res.ok will be false if the status code set to 4xx in the controller action
-	if (res.ok) return res.json();
-	throw new Error("Bad Request");
+	try {
+		const res = await fetch(url, options);
+		if (res.ok) return res.json();
+		//other status from server, 404/505 etc
+		else {
+			const errorMessage = `Request failed with status ${res.status} (${res.statusText}) for URL: ${url}`;
+			throw new Error(errorMessage);
+		}
+		//other errors during fetch req, rejected promise (network issue/invalid JSON etc)
+	} catch (error) {
+		console.error("Error during fetch request:", error);
+		throw error;
+	}
 }

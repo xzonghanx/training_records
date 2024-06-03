@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import debug from "debug";
 import AuthPage from "../AuthPage/AuthPage";
 import NewOrderPage from "../NewOrderPage/NewOrderPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import NavBar from "../../../src/components/NavBar";
 import { getUser } from "../../utilities/users-service";
+import debug from "debug";
 const log = debug("pern:pages:App:App");
 
 function App() {

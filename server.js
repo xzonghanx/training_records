@@ -11,14 +11,11 @@ app.use(logger("dev"));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "dist")));
-app.use(require("./config/checkToken").checkTokenMiddleware);
 
-//note for server routes, we use /api as convention
-app.get("/api", (req, res) => {
-	res.json({ hello: "world" });
-});
+// app.use(require("./config/checkToken").checkTokenMiddleware);
 
 app.use("/api/users", require("./routes/api/usersRoutes"));
+app.use("/api/personnel", require("./routes/api/personnelRoutes"));
 
 // The following "catch all" route (note the *) is necessary to return the index.html on all non-AJAX requests
 app.get("/*", function (req, res) {

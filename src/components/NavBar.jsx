@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-//similar to Link, but additional class="active"
 import { logOut } from "../utilities/users-service";
 
 export default function NavBar({ setUser }) {
