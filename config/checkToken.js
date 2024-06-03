@@ -18,7 +18,6 @@ const checkTokenMiddleware = (req, res, next) => {
 		storeUser(req, res, payload.user);
 		next();
 	} catch (error) {
-		// res.status(401).json({ error });
 		storeUser(req, res, null);
 		next();
 	}

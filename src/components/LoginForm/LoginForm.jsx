@@ -2,7 +2,7 @@ import { login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
 
 import debug from "debug";
-const log = debug("mern:components:LoginForm");
+const log = debug("pern:components:LoginForm");
 
 export default function LoginForm({ setUser }) {
 	const navigate = useNavigate();

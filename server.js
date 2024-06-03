@@ -1,18 +1,15 @@
 const express = require("express");
 const path = require("path");
-// const favicon = require("serve-favicon");
 const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
-const debug = require("debug")("mern:server");
+const debug = require("debug")("pern:server");
 
 const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
 
-// Configure serve-favicon & static middleware to serve from production 'dist' folder
-// app.use(favicon(path.join(__dirname, "dist", "vite.svg")));
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(require("./config/checkToken").checkTokenMiddleware);
 

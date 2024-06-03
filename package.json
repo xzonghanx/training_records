@@ -1,10 +1,10 @@
 {
-  "name": "mern-infra",
+  "name": "training-mgmt",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "dev-react": "vite",
-    "dev-express": "set debug=mern:* & nodemon server.js",
+    "dev-express": "set debug=pern:* & nodemon server.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

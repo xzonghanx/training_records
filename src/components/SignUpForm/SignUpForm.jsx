@@ -3,7 +3,7 @@ import { Component } from "react";
 import { signUp } from "../../utilities/users-service";
 import debug from "debug";
 
-const log = debug("mern:components:SignUpForm");
+const log = debug("pern:components:SignUpForm");
 
 export default class SignUpForm extends Component {
 	state = {
@@ -63,12 +63,14 @@ export default class SignUpForm extends Component {
 					<br />
 
 					<label>
-						Password: <input name='password' value={this.state.password} onChange={this.handleChange} />
+						Password:{" "}
+						<input name='password' value={this.state.password} onChange={this.handleChange} />
 					</label>
 					<br />
 
 					<label>
-						Confirm: <input name='confirm' value={this.state.confirm} onChange={this.handleChange} />
+						Confirm:{" "}
+						<input name='confirm' value={this.state.confirm} onChange={this.handleChange} />
 					</label>
 					<br />
 

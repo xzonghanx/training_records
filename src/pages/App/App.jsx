@@ -6,7 +6,7 @@ import NewOrderPage from "../NewOrderPage/NewOrderPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import NavBar from "../../../src/components/NavBar";
 import { getUser } from "../../utilities/users-service";
-const log = debug("mern:pages:App:App");
+const log = debug("pern:pages:App:App");
 
 function App() {
 	const [user, setUser] = useState(getUser());

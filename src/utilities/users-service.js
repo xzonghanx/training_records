@@ -2,7 +2,7 @@
 import * as usersAPI from "./users-api";
 
 import debug from "debug";
-const log = debug("mern:utilities:users-service");
+const log = debug("pern:utilities:users-service");
 
 export function getToken() {
 	// getItem returns null if there's no string

@@ -2,7 +2,7 @@ import debug from "debug";
 import { Outlet } from "react-router-dom";
 import { checkToken } from "../../utilities/users-service";
 
-const log = debug("mern:pages:OrderHistoryPage");
+const log = debug("pern:pages:OrderHistoryPage");
 
 export default function OrderHistoryPage() {
 	const handleCheckToken = async () => {

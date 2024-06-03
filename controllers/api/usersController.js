@@ -1,5 +1,5 @@
 //reminder we are in EXPRESS now, so use require instead of import.
-const debug = require("debug")("mern:controllers:api:usersController");
+const debug = require("debug")("pern:controllers:api:usersController");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/user");

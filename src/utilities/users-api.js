@@ -1,5 +1,5 @@
 // import debug from "debug";
-// const log = debug("mern:utilities:users-api");
+// const log = debug("pern:utilities:users-api");
 import sendRequest from "./send-request";
 
 // This is the base path of the Express route we'll define
