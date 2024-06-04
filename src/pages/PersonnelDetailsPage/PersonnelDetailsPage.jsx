@@ -30,10 +30,12 @@ export default function PersonnelDetailsPage() {
 		navigate(`/personnel`);
 	};
 
+	//TODO ADD EDIT+DELETE AUTHORISATION (one)
+	//TODO sign authorisation (one)
+
 	return (
 		<>
 			<h1>Personnel Details page</h1>
-
 			<Link to={`/personnel/${personId}/edit`}>
 				<button>EDIT Personnel Details</button>
 			</Link>
@@ -73,6 +75,9 @@ export default function PersonnelDetailsPage() {
 			</table>
 			<br />
 			<h2>Authorisations</h2>
+			<Link to={`/authorisation/${personId}/new`}>
+				<button>Add Qualfication Record</button>
+			</Link>
 			<table>
 				<thead>
 					<tr>

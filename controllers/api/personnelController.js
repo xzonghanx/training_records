@@ -103,7 +103,7 @@ const removeMany = async (req, res) => {
 	}
 };
 
-//change update ORD to just by date for all, and auto if possible, instead of by batch/team; can use nodejs cron.
+//TODO change update ORD to just by date for all, and auto if possible, instead of by batch/team; can use nodejs cron.
 const updateORD = async (req, res) => {
 	try {
 		const { team } = req.body;

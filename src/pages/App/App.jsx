@@ -4,6 +4,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import PersonnelOverviewPage from "../PersonnelOverviewPage/PersonnelOverviewPage";
 import PersonnelDetailsPage from "../PersonnelDetailsPage/PersonnelDetailsPage";
 import AuthoriseRecordsPage from "../AuthoriseRecordsPage/AuthoriseRecordsPage";
+import AddAuthorisationPage from "../AddAuthorisationPage/AddAuthorisationPage";
 import EditPersonnelPage from "../EditPersonnelPage/EditPersonnelPage";
 import NavBar from "../../../src/components/NavBar";
 import { getUser } from "../../utilities/users-service";
@@ -32,6 +33,7 @@ function App() {
 							<Route path='/personnel/:personId' element={<PersonnelDetailsPage />} />
 							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />} />
 							<Route path='/authorisation' element={<AuthoriseRecordsPage />} />
+							<Route path='/authorisation/:personId/new' element={<AddAuthorisationPage />} />
 							{/* Opened up Route to allow use of Outlet, allows 2 Routes to be displayed. this path is /orders2/new*/}
 							<Route path='/orders2' element={<OrderHistoryPage />}>
 								<Route path='new' element={<NewOrderPage />} />

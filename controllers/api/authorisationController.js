@@ -27,7 +27,7 @@ const create = async (req, res) => {
 	}
 };
 
-//dont really need this
+//! dont really need this
 const index = async (req, res) => {
 	try {
 		const result = await pool.query("SELECT * from authorisation");
