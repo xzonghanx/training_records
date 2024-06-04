@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
-import { fetchAllPersonnel } from "../../utilities/personnel-service"; //TODO UPDATE THIS
+import { fetchAllPersonnel } from "../../utilities/personnel-service"; //TODO update to authorisation??
+import { getUser } from "../../utilities/users-service";
 
 import debug from "debug";
 const log = debug("pern:pages:AuthoriseRecordsPage");
 
 export default function AuthoriseRecordsPage() {
 	const [records, setRecords] = useState([]);
+	const [selectedIds, setSelectedIds] = useState([]);
+	const user = getUser();
+	log("user %o:", user); //PASS into sign?
 
-	//set state for filters then search based on filters.
+	//TODO set state for filters then search based on filters.
+	//create filtered state for records. (select option to set)
+	//then map filteredrecords
 
 	useEffect(() => {
 		const getAllRecords = async () => {
@@ -22,9 +28,22 @@ export default function AuthoriseRecordsPage() {
 		getAllRecords();
 	}, []);
 
+	const handleCheckboxChange = (id) => {
+		setSelectedIds((prevSelectedIds) =>
+			prevSelectedIds.includes(id)
+				? prevSelectedIds.filter((selectedId) => selectedId !== id)
+				: [...prevSelectedIds, id]
+		);
+		log("selectedIDs", selectedIds);
+	};
+
+	//TODO also change then sign_id, just use name?
+	//TODO sign one or sign many
 	const handleSign = () => {
 		log("sign");
 	};
+
+	//TODO delete authorisations
 
 	return (
 		<>
@@ -62,9 +81,9 @@ export default function AuthoriseRecordsPage() {
 							<td>{person?.q_code}</td>
 							<td>{person?.q_type}</td>
 							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
-							<td>{person?.task1}</td>
-							<td>{person?.task2}</td>
-							<td>{person?.task3}</td>
+							<td>{person.task1 ? new Date(person.task1).toLocaleDateString() : null}</td>
+							<td>{person.task2 ? new Date(person.task2).toLocaleDateString() : null}</td>
+							<td>{person.task3 ? new Date(person.task3).toLocaleDateString() : null}</td>
 							<td>{person.instructor_sign ? "instructor name?" : null}</td>
 							<td>{person?.instructor_ts}</td>
 							<td>{person?.trainingic_sign}</td>
@@ -72,7 +91,11 @@ export default function AuthoriseRecordsPage() {
 							<td>{person?.officer_sign}</td>
 							<td>{person?.officer_ts}</td>
 							<td>
-								<input type='checkbox' />
+								<input
+									type='checkbox'
+									checked={selectedIds.includes(person.person_id)}
+									onChange={() => handleCheckboxChange(person.person_id)}
+								/>
 							</td>
 							<td>
 								<button onClick={() => handleSign(person.person_id)}>sign</button>

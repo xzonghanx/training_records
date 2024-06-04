@@ -75,6 +75,34 @@ const edit = async (req, res) => {
 	}
 };
 
+const removeOne = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const result = await pool.query("DELETE from personnel WHERE person_id = $1 RETURNING *", [id]);
+		res.status(201).json(result.rows[0]);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
+//TODO test this function and SIGN many function after setup checkbox.
+const removeMany = async (req, res) => {
+	const { ids } = req.body; //this should be an array
+	if (ids.length < 1) {
+		return res.status(400).json({ error: "Invalid or empty IDs array" });
+	}
+	try {
+		const query = "DELETE from personnel WHERE person_id = ANY($1::int[]) RETURNING *";
+		const values = [ids];
+		const result = await pool.query(query, values);
+		res.status(201).json(result.rows[0]);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
 //change update ORD to just by date for all, and auto if possible, instead of by batch/team; can use nodejs cron.
 const updateORD = async (req, res) => {
 	try {
@@ -102,5 +130,7 @@ module.exports = {
 	index,
 	show,
 	edit,
+	removeOne,
+	removeMany,
 	updateORD,
 };

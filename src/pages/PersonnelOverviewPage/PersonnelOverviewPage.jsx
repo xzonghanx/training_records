@@ -46,7 +46,7 @@ export default function PersonnelOverviewPage() {
 						<th>Service</th>
 						<th>Vocation</th>
 						<th>Team</th>
-						<th>Qualifcation</th>
+						<th>Qualification</th>
 						<th>Latest Authorisation Date</th>
 						<th>Currency Level</th>
 					</tr>

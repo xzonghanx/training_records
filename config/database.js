@@ -1,6 +1,5 @@
 const { Pool } = require("pg");
 const connectionString = process.env.DATABASE_URL;
-// const connectionString = "postgresql://unit4_owner:9iMaYTvKPr8j@ep-wild-darkness-a1xv33as.ap-southeast-1.aws.neon.tech/sqltest?sslmode=require";
 
 const pool = new Pool({
 	connectionString,

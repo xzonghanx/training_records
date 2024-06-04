@@ -15,3 +15,11 @@ export const addPerson = async (data) => {
 export const editPerson = async (data, personId) => {
 	return await personnelAPI.editPerson(data, personId);
 };
+
+export const deleteOnePerson = async (personId) => {
+	return await personnelAPI.deleteOnePerson(personId);
+};
+
+export const deleteManyPersonnel = async (data) => {
+	return await personnelAPI.deleteManyPersonnel(data);
+};

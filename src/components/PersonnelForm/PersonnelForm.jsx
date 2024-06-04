@@ -1,11 +1,27 @@
-import { addPerson, editPerson } from "../../utilities/personnel-service";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { addPerson, editPerson } from "../../utilities/personnel-service";
+import { fetchAllQualifications } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelForm");
 
 export default function PersonnelForm({ person, setPerson, personId }) {
+	const [qualifications, setQualifications] = useState([]);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const getAllQualifications = async () => {
+			try {
+				const data = await fetchAllQualifications();
+				setQualifications(data);
+			} catch (error) {
+				log("error getting qualifications", error);
+			}
+		};
+		getAllQualifications();
+	}, []);
+	// log("allQualifications: %o", qualifications);
 
 	const handleSave = async (e) => {
 		e.preventDefault();
@@ -62,20 +78,24 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 				/>
 				<br />
 				<label htmlFor='service'>Service</label>
-				<input
-					type='text'
+				<select
 					name='service'
-					value={person?.service || ""}
-					onChange={(evt) => setPerson({ ...person, service: evt.target.value })}
-				/>
+					onChange={(evt) => setPerson({ ...person, service: evt.target.value })}>
+					<option value={person?.service || ""}>{person?.service || ""}</option>
+					<option value='NSF'>NSF</option>
+					<option value='NSmen'>NSmen</option>
+					<option value='REGULAR'>REGULAR</option>
+				</select>
 				<br />
 				<label htmlFor='vocation'>Vocation</label>
-				<input
-					type='text'
+				<select
 					name='vocation'
-					value={person?.vocation || ""}
-					onChange={(evt) => setPerson({ ...person, vocation: evt.target.value })}
-				/>
+					onChange={(evt) => setPerson({ ...person, vocation: evt.target.value })}>
+					<option value={person?.vocation || ""}>{person?.vocation || ""}</option>
+					<option value='AFE'>AFE</option>
+					<option value='AFE'>PNR</option>
+					<option value='AFE'>FD ENGR</option>
+				</select>
 				<br />
 				<label htmlFor='team'>Team</label>
 				<input
@@ -86,12 +106,16 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 				/>
 				<br />
 				<label htmlFor='qualification'>Qualification</label>
-				<input
-					type='text'
+				<select
 					name='qualification'
-					value={person?.qualification || ""}
-					onChange={(evt) => setPerson({ ...person, qualification: evt.target.value })}
-				/>
+					onChange={(evt) => setPerson({ ...person, qualification: evt.target.value })}>
+					<option value={person?.qualification || ""}>{person?.qualification || ""}</option>
+					{qualifications?.map((qual) => (
+						<option key={qual?.q_id} value={qual?.q_code}>
+							{qual?.q_name}
+						</option>
+					))}
+				</select>
 				<br />
 				<button type='submit'>SAVE</button>
 			</form>

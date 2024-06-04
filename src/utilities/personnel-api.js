@@ -15,5 +15,13 @@ export function addPerson(data) {
 }
 
 export function editPerson(data, personId) {
-	return sendRequest(`${PERSONNEL_URL}/${personId}/edit`, "PUT", data);
+	return sendRequest(`${PERSONNEL_URL}/${personId}`, "PUT", data);
+}
+
+export function deleteOnePerson(personId) {
+	return sendRequest(`${PERSONNEL_URL}/${personId}`, "DELETE");
+}
+
+export function deleteManyPersonnel(data) {
+	return sendRequest(PERSONNEL_URL, "DELETE", data);
 }

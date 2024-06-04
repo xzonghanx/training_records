@@ -66,35 +66,18 @@ const edit = async (req, res) => {
 	}
 };
 
-/*
-const updateAuthorisation = async (qId, updates) => {
-	const fields = Object.keys(updates);
-	const values = Object.values(updates);
-  
-	let setClause = fields.map((field, index) => `${field} = $${index + 1}`).join(", ");
-	values.push(qId);
-  
-	const query = `
-	  UPDATE authorisation
-	  SET ${setClause}
-	  WHERE q_id = $${fields.length + 1}
-	  RETURNING *;
-	`;
-	const res = await pool.query(query, values);
-	return res.rows[0];
-*/
-
 //TODO select all and sign (include WHERE ... )
 //TODO setup if to change query text based on user type (instructor or trainingIC or OIC)
 const sign = async (req, res) => {
 	try {
 		const { id } = req.params; //personnelID
 		const { userId, qCode } = req.body; //should i use q_id or q_name or q_code
+		//TODO change to WHERE ath_id=$
 		const query = `
 			UPDATE authorisation SET 
 			training_ic_endorsement=$1, 
 			training_ic_endorsement_timestamp=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore' 
-			WHERE p_id=$2 AND q_code=$3 
+			WHERE p_id=$2 AND q_code=$3
 			RETURNING *`;
 		//might have conflict between date UTC timezone and SG timezone
 		const values = [userId, id, qCode];

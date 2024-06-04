@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 6;
 const jwt = require("jsonwebtoken");
 const createJWT = (user) => {
-	return jwt.sign({ user }, process.env.SECRET, { expiresIn: "20m" });
+	return jwt.sign({ user }, process.env.SECRET, { expiresIn: "60m" });
 };
 const debug = require("debug")("pern:controllers:api:usersController");
 
@@ -11,7 +11,7 @@ const index = async (req, res) => {
 	try {
 		const result = await pool.query(`
 			SELECT user_id, u_name, u_email, u_unit, u_appt, u_sign
-			FROM users`); //when getting users, remove password from the fields, select just id, name, email
+			FROM users`); //when getting users, remove password from the fields
 		res.status(200).json(result.rows);
 	} catch (err) {
 		console.error("Error executing query", err.stack);

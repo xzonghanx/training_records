@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { fetchOnePersonnel } from "../../utilities/personnel-service";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { fetchOnePersonnel, deleteOnePerson } from "../../utilities/personnel-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelDetailsPage");
@@ -8,6 +8,7 @@ const log = debug("pern:pages:PersonnelDetailsPage");
 export default function PersonnelDetailsPage() {
 	const [personnel, setPersonnel] = useState([]);
 	const { personId } = useParams();
+	const navigate = useNavigate();
 	// const user = getUser();
 
 	useEffect(() => {
@@ -23,9 +24,21 @@ export default function PersonnelDetailsPage() {
 		getPersonnel();
 	}, [personId]);
 
+	const handleDelete = async () => {
+		log("handle delete");
+		await deleteOnePerson(personId);
+		navigate(`/personnel`);
+	};
+
 	return (
 		<>
 			<h1>Personnel Details page</h1>
+
+			<Link to={`/personnel/${personId}/edit`}>
+				<button>EDIT Personnel Details</button>
+			</Link>
+			<button onClick={handleDelete}>DELETE Personnel Details</button>
+
 			<table>
 				<thead>
 					<tr>
@@ -82,10 +95,10 @@ export default function PersonnelDetailsPage() {
 						<tr key={person.ath_id}>
 							<td>{person?.q_code}</td>
 							<td>{person?.q_type}</td>
-							<td>{person?.q_date}</td>
-							<td>{person?.task1}</td>
-							<td>{person?.task2}</td>
-							<td>{person?.task3}</td>
+							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
+							<td>{person.task1 ? new Date(person.task1).toLocaleDateString() : null}</td>
+							<td>{person.task2 ? new Date(person.task2).toLocaleDateString() : null}</td>
+							<td>{person.task3 ? new Date(person.task3).toLocaleDateString() : null}</td>
 							<td>{person?.instructor_sign}</td>
 							<td>{person?.instructor_ts}</td>
 							<td>{person?.trainingic_sign}</td>
