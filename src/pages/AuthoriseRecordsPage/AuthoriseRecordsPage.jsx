@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchAllPersonnel } from "../../utilities/personnel-service"; //TODO update to authorisation??
-import { getUser } from "../../utilities/users-service";
+import { getUser, fetchUsers } from "../../utilities/users-service";
 import { signRecord, deleteRecords } from "../../utilities/authorisation-service";
+import moment from "moment-timezone";
 
 import debug from "debug";
 const log = debug("pern:pages:AuthoriseRecordsPage");
@@ -10,6 +11,7 @@ export default function AuthoriseRecordsPage() {
 	const [records, setRecords] = useState([]);
 	const [selectedIds, setSelectedIds] = useState([]);
 	const user = getUser();
+	const [users, setUsers] = useState();
 
 	//TODO set state for filters then search based on filters.
 	//create filtered state for records. (select option to set)
@@ -29,6 +31,16 @@ export default function AuthoriseRecordsPage() {
 				log("error getting nominal roll", error);
 			}
 		};
+		const getUsers = async () => {
+			try {
+				const data = await fetchUsers();
+				log("fetchUsers: %o", data);
+				setUsers(data);
+			} catch (error) {
+				log("error getting users", error);
+			}
+		};
+		getUsers();
 		getAllRecords();
 	}, []);
 
@@ -99,12 +111,36 @@ export default function AuthoriseRecordsPage() {
 							<td>{person.task1 ? new Date(person.task1).toLocaleDateString() : null}</td>
 							<td>{person.task2 ? new Date(person.task2).toLocaleDateString() : null}</td>
 							<td>{person.task3 ? new Date(person.task3).toLocaleDateString() : null}</td>
-							<td>{person.instructor_sign ? "instructor name?" : null}</td>
-							<td>{person?.instructor_ts}</td>
-							<td>{person?.trainingic_sign}</td>
-							<td>{person?.trainingic_ts}</td>
-							<td>{person?.officer_sign}</td>
-							<td>{person?.officer_ts}</td>
+							<td>
+								{person.instructor_sign
+									? users.find((user) => user.u_sign === person.instructor_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.instructor_ts
+									? moment(person.instructor_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
+							<td>
+								{person.trainingic_sign
+									? users?.find((user) => user.u_sign === person.trainingic_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.trainingic_ts
+									? moment(person.trainingic_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
+							<td>
+								{person.officer_sign
+									? users.find((user) => user.u_sign === person.officer_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.officer_ts
+									? moment(person.officer_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
 							<td>
 								<input
 									type='checkbox'

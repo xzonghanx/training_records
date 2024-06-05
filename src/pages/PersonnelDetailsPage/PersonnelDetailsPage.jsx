@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getUser } from "../../utilities/users-service";
+import { getUser, fetchUsers } from "../../utilities/users-service";
 import { fetchOnePersonnel, deleteOnePerson } from "../../utilities/personnel-service";
 import { signRecord } from "../../utilities/authorisation-service";
+import moment from "moment-timezone";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelDetailsPage");
@@ -12,6 +13,7 @@ export default function PersonnelDetailsPage() {
 	const { personId } = useParams();
 	const navigate = useNavigate();
 	const user = getUser();
+	const [users, setUsers] = useState();
 
 	useEffect(() => {
 		const getPersonnel = async () => {
@@ -23,6 +25,16 @@ export default function PersonnelDetailsPage() {
 				log("error getting person details", error);
 			}
 		};
+		const getUsers = async () => {
+			try {
+				const data = await fetchUsers();
+				log("fetchUsers: %o", data);
+				setUsers(data);
+			} catch (error) {
+				log("error getting users", error);
+			}
+		};
+		getUsers();
 		getPersonnel();
 	}, [personId]);
 
@@ -117,12 +129,39 @@ export default function PersonnelDetailsPage() {
 							<td>{person.task1 ? new Date(person.task1).toLocaleDateString() : null}</td>
 							<td>{person.task2 ? new Date(person.task2).toLocaleDateString() : null}</td>
 							<td>{person.task3 ? new Date(person.task3).toLocaleDateString() : null}</td>
-							<td>{person?.instructor_sign}</td>
-							<td>{person?.instructor_ts}</td>
-							<td>{person?.trainingic_sign}</td>
-							<td>{person?.trainingic_ts}</td>
-							<td>{person?.officer_sign}</td>
-							<td>{person?.officer_ts}</td>
+
+							<td>
+								{person.instructor_sign
+									? users.find((user) => user.u_sign === person.instructor_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.instructor_ts
+									? moment(person.instructor_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
+
+							<td>
+								{person.trainingic_sign
+									? users.find((user) => user.u_sign === person.trainingic_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.trainingic_ts
+									? moment(person.trainingic_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
+
+							<td>
+								{person.officer_sign
+									? users.find((user) => user.u_sign === person.officer_sign).u_name
+									: null}
+							</td>
+							<td>
+								{person.officer_ts
+									? moment(person.officer_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									: null}
+							</td>
 							<td>
 								<button
 									onClick={(e) => {

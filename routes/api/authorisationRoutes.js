@@ -5,7 +5,7 @@ const router = express.Router();
 const authorisationCtrl = require("../../controllers/api/authorisationController");
 const qualificationCtrl = require("../../controllers/api/qualificationController");
 
-router.get("/", authorisationCtrl.index); //not used yet.
+// router.get("/", authorisationCtrl.index);
 router.post("/", authorisationCtrl.create);
 router.delete("/", authorisationCtrl.removeMany);
 

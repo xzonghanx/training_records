@@ -17,16 +17,16 @@ const create = async (req, res) => {
 	}
 };
 
-//! dont really need this
-const index = async (req, res) => {
-	try {
-		const result = await pool.query("SELECT * from authorisation");
-		res.status(200).json(result.rows);
-	} catch (err) {
-		console.error("Error executing query", err.stack);
-		res.status(500).json({ err });
-	}
-};
+//dont really need this
+// const index = async (req, res) => {
+// 	try {
+// 		const result = await pool.query("SELECT * from authorisation");
+// 		res.status(200).json(result.rows);
+// 	} catch (err) {
+// 		console.error("Error executing query", err.stack);
+// 		res.status(500).json({ err });
+// 	}
+// };
 
 const show = async (req, res) => {
 	const { athId } = req.params;
@@ -137,7 +137,7 @@ const removeMany = async (req, res) => {
 
 module.exports = {
 	create,
-	index,
+	// index,
 	sign,
 	edit,
 	show,
