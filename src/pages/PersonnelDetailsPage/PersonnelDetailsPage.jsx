@@ -28,7 +28,7 @@ export default function PersonnelDetailsPage() {
 		const getUsers = async () => {
 			try {
 				const data = await fetchUsers();
-				log("fetchUsers: %o", data);
+				// log("fetchUsers: %o", data);
 				setUsers(data);
 			} catch (error) {
 				log("error getting users", error);
@@ -90,8 +90,8 @@ export default function PersonnelDetailsPage() {
 						<td>{personnel[0]?.vocation}</td>
 						<td>{personnel[0]?.team}</td>
 						<td>{personnel[0]?.q_code}</td>
-						<td>{personnel[0]?.q_date}</td> {/*need to change to latest date*/}
-						<td>CL X </td> {/*need to change to derive CL based on latest Q date*/}
+						<td>{personnel[0]?.q_date}</td> {/* //TODO need to change to latest date*/}
+						<td>CL X </td> {/* //TODO need to change to derive CL based on latest Q date*/}
 					</tr>
 				</tbody>
 			</table>
@@ -132,34 +132,34 @@ export default function PersonnelDetailsPage() {
 
 							<td>
 								{person.instructor_sign
-									? users.find((user) => user.u_sign === person.instructor_sign).u_name
+									? users?.find((user) => user.u_sign === person.instructor_sign).u_name
 									: null}
 							</td>
 							<td>
 								{person.instructor_ts
-									? moment(person.instructor_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									? moment.utc(person.instructor_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
 
 							<td>
 								{person.trainingic_sign
-									? users.find((user) => user.u_sign === person.trainingic_sign).u_name
+									? users?.find((user) => user.u_sign === person.trainingic_sign).u_name
 									: null}
 							</td>
 							<td>
 								{person.trainingic_ts
-									? moment(person.trainingic_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									? moment.utc(person.trainingic_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
 
 							<td>
 								{person.officer_sign
-									? users.find((user) => user.u_sign === person.officer_sign).u_name
+									? users?.find((user) => user.u_sign === person.officer_sign).u_name
 									: null}
 							</td>
 							<td>
 								{person.officer_ts
-									? moment(person.officer_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
+									? moment.utc(person.officer_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
 							<td>

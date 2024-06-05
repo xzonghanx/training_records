@@ -17,3 +17,7 @@ export function checkToken() {
 export function fetchUsers() {
 	return sendRequest(BASE_URL, "GET");
 }
+
+export function fetchFilterOptions() {
+	return sendRequest(`${BASE_URL}/filters`, "GET");
+}

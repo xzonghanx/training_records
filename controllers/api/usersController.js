@@ -62,8 +62,25 @@ const login = async (req, res) => {
 	}
 };
 
+const filters = async (req, res) => {
+	try {
+		const teamOptions = await pool.query("SELECT DISTINCT team FROM personnel");
+		const qCodeOptions = await pool.query("SELECT DISTINCT q_code FROM authorisation");
+		const qTypeOptions = await pool.query("SELECT DISTINCT q_type FROM authorisation");
+		res.json({
+			teamOptions: teamOptions.rows,
+			qCodeOptions: qCodeOptions.rows,
+			qTypeOptions: qTypeOptions.rows,
+		});
+	} catch (err) {
+		console.error("Error fetching filter options", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
 module.exports = {
 	create,
 	index,
 	login,
+	filters,
 };

@@ -10,11 +10,13 @@ export default function PersonnelOverviewPage() {
 	const navigate = useNavigate();
 	// const user = getUser();
 
+	//TODO fetchAllPersonnel needs to remvoe duplicates of name --> only select latest authorisation.
+
 	useEffect(() => {
 		const getAllPersonnel = async () => {
 			try {
 				const data = await fetchAllPersonnel();
-				log("getAllPersonnel: %o", data);
+				// log("getAllPersonnel: %o", data);
 				setAllPersonnel(data);
 			} catch (error) {
 				log("error getting nominal roll", error);
@@ -66,9 +68,9 @@ export default function PersonnelOverviewPage() {
 							<td>{person.vocation}</td>
 							<td>{person.team}</td>
 							<td>{person?.q_code}</td>
-							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>{" "}
-							{/*need to change to latest date*/}
-							<td>CL X</td> {/*need to change to derive CL based on latest Q date*/}
+							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
+							{/* //TODO need to change to latest date*/}
+							<td>CL X</td> {/* //TODOneed to change to derive CL based on latest Q date*/}
 						</tr>
 					))}
 				</tbody>
