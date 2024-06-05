@@ -21,3 +21,11 @@ export function editAuthorisation(athId, data) {
 export const signRecord = async (athId, user) => {
 	return sendRequest(`${AUTHORISATION_URL}/sign`, "PATCH", athId, user);
 };
+
+export const deleteRecord = async (athId) => {
+	return sendRequest(`${AUTHORISATION_URL}/${athId}`, "DELETE");
+};
+
+export const deleteRecords = async (athId) => {
+	return sendRequest(`${AUTHORISATION_URL}`, "DELETE", athId);
+};

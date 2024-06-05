@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchAllPersonnel } from "../../utilities/personnel-service"; //TODO update to authorisation??
 import { getUser } from "../../utilities/users-service";
-import { signRecord } from "../../utilities/authorisation-service";
+import { signRecord, deleteRecords } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:AuthoriseRecordsPage");
@@ -14,6 +14,10 @@ export default function AuthoriseRecordsPage() {
 	//TODO set state for filters then search based on filters.
 	//create filtered state for records. (select option to set)
 	//then map filteredrecords
+
+	//TODO update state and refresh after sign/delete
+	//currently using window.location.reload();
+	//see if can change to update state and include dependency in useEffect.
 
 	useEffect(() => {
 		const getAllRecords = async () => {
@@ -37,21 +41,27 @@ export default function AuthoriseRecordsPage() {
 		log("selectedIDs", selectedIds);
 	};
 
-	//TODO also change then sign_id, just use name?
-	//TODO sign one or sign many
 	const handleSign = async () => {
 		log("selectedIds, %o", selectedIds);
 		const athId = selectedIds;
 		const response = await signRecord({ athId, user });
 		log("signed, %o", response);
+		window.location.reload();
 	};
 
-	//TODO delete authorisations
+	const handleDelete = async () => {
+		log("selectedIds, %o", selectedIds);
+		const athId = selectedIds;
+		const response = await deleteRecords({ athId });
+		log("signed, %o", response);
+		window.location.reload();
+	};
 
 	return (
 		<>
 			<h1>Authorise Records page</h1>
 			<button onClick={handleSign}>Sign Selected</button>
+			<button onClick={handleDelete}>Delete Selected</button>
 			<table>
 				<thead>
 					<tr>

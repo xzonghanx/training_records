@@ -39,11 +39,12 @@ const show = async (req, res) => {
 	}
 };
 
+//TODO
 // ALL supervisors can create. but last user can edit before signing.
 // lock edit button in front end after sign???
 // edit means re-sign; need to set IF condition to see who update/sign --> trainingIC or OIC.
 // any edit will remove existing signature?
-//* this edit includes all fields --> PUT
+
 const edit = async (req, res) => {
 	try {
 		const { athId } = req.params; //personnelID
@@ -68,10 +69,10 @@ const edit = async (req, res) => {
 };
 
 const sign = async (req, res) => {
-	debug("body", req.body);
+	// debug("body", req.body);
 	const { user, athId } = req.body;
-	debug("user", user);
-	debug("athId", athId);
+	// debug("user", user);
+	// debug("athId", athId);
 	let signer = "";
 	if (user.u_appt === "oic") {
 		signer = "officer";
@@ -107,10 +108,39 @@ const sign = async (req, res) => {
 	}
 };
 
+const remove = async (req, res) => {
+	try {
+		const { athId } = req.params;
+		const result = await pool.query("DELETE from authorisation WHERE ath_id = $1 RETURNING *", [
+			athId,
+		]);
+		res.status(201).json(result.rows[0]);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
+const removeMany = async (req, res) => {
+	const { athId } = req.body;
+	debug("athId", athId);
+	try {
+		const query = "DELETE from authorisation WHERE ath_id = ANY($1::int[]) RETURNING *";
+		const values = [athId];
+		const result = await pool.query(query, values);
+		res.status(201).json(result.rows[0]);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+
 module.exports = {
 	create,
 	index,
 	sign,
 	edit,
 	show,
+	remove,
+	removeMany,
 };

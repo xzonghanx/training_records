@@ -7,15 +7,13 @@ const qualificationCtrl = require("../../controllers/api/qualificationController
 
 router.get("/", authorisationCtrl.index); //not used yet.
 router.post("/", authorisationCtrl.create);
+router.delete("/", authorisationCtrl.removeMany);
 
-router.patch("/sign", authorisationCtrl.sign); //sign many
+router.patch("/sign", authorisationCtrl.sign);
 router.get("/qualifications", qualificationCtrl.index);
 
 router.get("/:athId", authorisationCtrl.show);
 router.put("/:athId", authorisationCtrl.edit);
-// router.patch("/:athid/sign", authorisationCtrl.sign); //uses params
-
-//CHANGE TO FOLLOW RESTFULAPI, USE ATHID, PUT PERSONID IN BODY.
-// router.delete("/:athid"", authorisationCtrl.delete");
+router.delete("/:athId", authorisationCtrl.remove);
 
 module.exports = router;

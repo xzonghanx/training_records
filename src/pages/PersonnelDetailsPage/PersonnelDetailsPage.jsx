@@ -36,13 +36,11 @@ export default function PersonnelDetailsPage() {
 		navigate(`/personnel/${personId}/authorisation/${athId}`);
 	};
 
-	//TODO DELETE AUTHORISATION (one)
-	//TODO sign authorisation (one)
-
 	const handleSign = async (ath_id) => {
 		const athId = [ath_id];
 		const response = await signRecord({ athId, user });
 		log("signed, %o", response);
+		window.location.reload();
 	};
 
 	return (

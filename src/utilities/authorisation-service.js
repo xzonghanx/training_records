@@ -19,3 +19,11 @@ export const editAuthorisation = async (athId, data) => {
 export const signRecord = async (athId, user) => {
 	return await authorisationAPI.signRecord(athId, user);
 };
+
+export const deleteRecord = async (athId) => {
+	return await authorisationAPI.deleteRecord(athId);
+};
+
+export const deleteRecords = async (athId) => {
+	return await authorisationAPI.deleteRecords(athId);
+};

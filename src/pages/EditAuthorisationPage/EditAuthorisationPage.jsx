@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, Outlet } from "react-router-dom";
+import { useParams, useNavigate, Outlet } from "react-router-dom";
 import AuthorisationForm from "../../components/AuthorisationForm/AuthorisationForm";
-import { fetchOneAuthorisationRecord } from "../../utilities/authorisation-service";
+import { fetchOneAuthorisationRecord, deleteRecord } from "../../utilities/authorisation-service";
 import moment from "moment-timezone";
 import debug from "debug";
 const log = debug("pern:pages:EditAuthorisationPage");
@@ -9,6 +9,7 @@ const log = debug("pern:pages:EditAuthorisationPage");
 export default function EditAuthorisationPage() {
 	const [authRecords, setAuthRecords] = useState([]);
 	const { personId, athId } = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getOneAuthorisationRecord = async () => {
@@ -27,6 +28,12 @@ export default function EditAuthorisationPage() {
 		getOneAuthorisationRecord();
 	}, [athId]);
 
+	const handleDelete = async () => {
+		log("handle delete");
+		await deleteRecord(athId);
+		navigate(`/personnel/${personId}`);
+	};
+
 	return (
 		<>
 			<h1>Edit Authorisation Page</h1>
@@ -36,6 +43,8 @@ export default function EditAuthorisationPage() {
 				personId={personId}
 				athId={athId}
 			/>
+			<br />
+			<button onClick={handleDelete}>DELETE Record</button>
 			<Outlet />
 		</>
 	);

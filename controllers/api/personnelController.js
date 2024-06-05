@@ -1,7 +1,6 @@
 const pool = require("../../config/database");
 const debug = require("debug")("pern:controllers:api:personnelController");
 
-//can choose to select only specific fields instead.
 const index = async (req, res) => {
 	try {
 		const result = await pool.query(
