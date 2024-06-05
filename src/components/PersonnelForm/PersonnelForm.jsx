@@ -105,7 +105,7 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 					onChange={(evt) => setPerson({ ...person, team: evt.target.value })}
 				/>
 				<br />
-				<label htmlFor='qualification'>Qualification</label>
+				{/* <label htmlFor='qualification'>Qualification</label>
 				<select
 					name='qualification'
 					onChange={(evt) => setPerson({ ...person, qualification: evt.target.value })}>
@@ -116,7 +116,7 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 						</option>
 					))}
 				</select>
-				<br />
+				<br /> */}
 				<button type='submit'>SAVE</button>
 			</form>
 		</>

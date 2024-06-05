@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Outlet } from "react-router-dom";
 import AuthorisationForm from "../../components/AuthorisationForm/AuthorisationForm";
 // import debug from "debug";
 // const log = debug("pern:pages:AddAuthorisationPage");
@@ -16,6 +16,7 @@ export default function AddAuthorisationPage() {
 				setAuthRecords={setAuthRecords}
 				personId={personId}
 			/>
+			<Outlet />
 		</>
 	);
 }

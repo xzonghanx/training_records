@@ -6,13 +6,16 @@ const authorisationCtrl = require("../../controllers/api/authorisationController
 const qualificationCtrl = require("../../controllers/api/qualificationController");
 
 router.get("/", authorisationCtrl.index); //not used yet.
-router.patch("/sign", authorisationCtrl.sign); //sign many
+router.post("/", authorisationCtrl.create);
 
+router.patch("/sign", authorisationCtrl.sign); //sign many
 router.get("/qualifications", qualificationCtrl.index);
 
-router.post("/:id", authorisationCtrl.create);
-router.put("/:id", authorisationCtrl.edit); //change routes for this edit.
-// router.delete("/:id"", authorisationCtrl.delete");
-router.patch("/:id/sign", authorisationCtrl.sign); //uses params
+router.get("/:athId", authorisationCtrl.show);
+router.put("/:athId", authorisationCtrl.edit);
+
+//CHANGE TO FOLLOW RESTFULAPI, USE ATHID, PUT PERSONID IN BODY.
+// router.delete("/:athid"", authorisationCtrl.delete");
+router.patch("/:athid/sign", authorisationCtrl.sign); //uses params
 
 module.exports = router;

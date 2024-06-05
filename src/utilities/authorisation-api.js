@@ -6,6 +6,14 @@ export function fetchAllQualifications() {
 	return sendRequest(`${AUTHORISATION_URL}/qualifications`, "GET");
 }
 
-export function addAuthorisation(personId, data) {
-	return sendRequest(`${AUTHORISATION_URL}/${personId}`, "POST", data);
+export const fetchOneAuthorisationRecord = async (athId) => {
+	return sendRequest(`${AUTHORISATION_URL}/${athId}`, "GET");
+};
+
+export function addAuthorisation(data) {
+	return sendRequest(`${AUTHORISATION_URL}`, "POST", data);
+}
+
+export function editAuthorisation(athId, data) {
+	return sendRequest(`${AUTHORISATION_URL}/${athId}`, "PUT", data);
 }

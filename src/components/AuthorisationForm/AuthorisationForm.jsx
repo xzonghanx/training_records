@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-import { fetchAllQualifications, addAuthorisation } from "../../utilities/authorisation-service";
+import { useNavigate } from "react-router-dom";
+import {
+	fetchAllQualifications,
+	addAuthorisation,
+	editAuthorisation,
+} from "../../utilities/authorisation-service";
 import debug from "debug";
 const log = debug("pern:pages:AuthorisationForm");
 
-export default function AuthorisationForm({ authRecords, setAuthRecords, personId }) {
+export default function AuthorisationForm({ authRecords, setAuthRecords, personId, athId }) {
 	const [qualifications, setQualifications] = useState([]);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getAllQualifications = async () => {
@@ -20,26 +24,21 @@ export default function AuthorisationForm({ authRecords, setAuthRecords, personI
 		getAllQualifications();
 	}, []);
 
-	//TODO save; also differentiate add and edit form.
 	const handleSave = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
+		data.personId = personId;
 		log("data, %o", data);
-
-		const response = await addAuthorisation(personId, data);
-		log("add response, %o", response);
-		setAuthRecords([]);
-
-		// if (personId) {
-		// 	const response = await editPerson(data, personId);
-		// 	log("edit response, %o", response);
-		// 	navigate(`/personnel/${personId}`);
-		// } else {
-		// 	const response = await addPerson(data);
-		// 	log("add response, %o", response);
-		// 	setPerson([]);
-		// }
+		if (athId) {
+			const response = await editAuthorisation(athId, data);
+			log("edit response, %o", response);
+			navigate(`/personnel/${personId}`);
+		} else {
+			const response = await addAuthorisation(data);
+			log("add response, %o", response);
+			setAuthRecords([]);
+		}
 	};
 
 	return (
@@ -50,11 +49,9 @@ export default function AuthorisationForm({ authRecords, setAuthRecords, personI
 				}}>
 				<label htmlFor='qualification'>Qualification Name/Code</label>
 				<select
-					name='qCode'
-					onChange={(evt) => setAuthRecords({ ...authRecords, qualification: evt.target.value })}>
-					<option value={authRecords?.qualification || ""}>
-						{authRecords?.qualification || ""}
-					</option>
+					name='q_code'
+					onChange={(evt) => setAuthRecords({ ...authRecords, q_code: evt.target.value })}>
+					<option value={authRecords?.q_code || ""}>{authRecords?.q_code || ""}</option>
 					{qualifications?.map((qual) => (
 						<option key={qual?.q_id} value={qual?.q_code}>
 							{qual?.q_name} / {qual?.q_code}
@@ -64,9 +61,9 @@ export default function AuthorisationForm({ authRecords, setAuthRecords, personI
 				<br />
 				<label htmlFor='qualification type'>Qualification Type</label>
 				<select
-					name='qType'
-					onChange={(evt) => setAuthRecords({ ...authRecords, qType: evt.target.value })}>
-					<option value={authRecords?.qType || ""}>{authRecords?.qType || ""}</option>
+					name='q_type'
+					onChange={(evt) => setAuthRecords({ ...authRecords, q_type: evt.target.value })}>
+					<option value={authRecords?.q_type || ""}>{authRecords?.q_type || ""}</option>
 					<option value='initial'>initial</option>
 					<option value='post'>post</option>
 				</select>
@@ -74,9 +71,9 @@ export default function AuthorisationForm({ authRecords, setAuthRecords, personI
 				<label htmlFor='qualification date'>Qualification Date</label>
 				<input
 					type='date'
-					name='qDate'
-					value={authRecords?.qDate || ""}
-					onChange={(evt) => setAuthRecords({ ...authRecords, qDate: evt.target.value })}
+					name='q_date'
+					value={authRecords?.q_date || ""}
+					onChange={(evt) => setAuthRecords({ ...authRecords, q_date: evt.target.value })}
 				/>
 				<br />
 				<label htmlFor='task 1 date'>Task 1 Date</label>

@@ -4,6 +4,14 @@ export const fetchAllQualifications = async () => {
 	return await authorisationAPI.fetchAllQualifications();
 };
 
-export const addAuthorisation = async (personId, data) => {
-	return await authorisationAPI.addAuthorisation(personId, data);
+export const fetchOneAuthorisationRecord = async (athId) => {
+	return await authorisationAPI.fetchOneAuthorisationRecord(athId);
+};
+
+export const addAuthorisation = async (data) => {
+	return await authorisationAPI.addAuthorisation(data);
+};
+
+export const editAuthorisation = async (athId, data) => {
+	return await authorisationAPI.editAuthorisation(athId, data);
 };

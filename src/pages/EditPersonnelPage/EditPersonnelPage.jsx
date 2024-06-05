@@ -15,7 +15,6 @@ export default function EditPersonnelPage() {
 			try {
 				const data = await fetchOnePersonnel(personId);
 				// log("getOnePersonnel: %o", data);
-				//TODO change this data, change fetch details to just details without JOIN
 				const datum = data[0];
 				const ordDate = moment(datum.ord).tz("Asia/Singapore").format().split("T")[0];
 				// log("newdate %s", ordDate);

@@ -30,6 +30,10 @@ export default function PersonnelDetailsPage() {
 		navigate(`/personnel`);
 	};
 
+	const handleClickRow = (personId, athId) => {
+		navigate(`/personnel/${personId}/authorisation/${athId}`);
+	};
+
 	//TODO ADD EDIT+DELETE AUTHORISATION (one)
 	//TODO sign authorisation (one)
 
@@ -75,7 +79,7 @@ export default function PersonnelDetailsPage() {
 			</table>
 			<br />
 			<h2>Authorisations</h2>
-			<Link to={`/authorisation/${personId}/new`}>
+			<Link to={`/personnel/${personId}/authorisation/new`}>
 				<button>Add Qualfication Record</button>
 			</Link>
 			<table>
@@ -97,7 +101,10 @@ export default function PersonnelDetailsPage() {
 				</thead>
 				<tbody>
 					{personnel.map((person) => (
-						<tr key={person.ath_id}>
+						<tr
+							key={person.ath_id}
+							onClick={() => handleClickRow(person.person_id, person.ath_id)}
+							style={{ cursor: "pointer" }}>
 							<td>{person?.q_code}</td>
 							<td>{person?.q_type}</td>
 							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>

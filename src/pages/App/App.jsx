@@ -5,8 +5,11 @@ import PersonnelOverviewPage from "../PersonnelOverviewPage/PersonnelOverviewPag
 import PersonnelDetailsPage from "../PersonnelDetailsPage/PersonnelDetailsPage";
 import AuthoriseRecordsPage from "../AuthoriseRecordsPage/AuthoriseRecordsPage";
 import AddAuthorisationPage from "../AddAuthorisationPage/AddAuthorisationPage";
+import EditAuthorisationPage from "../EditAuthorisationPage/EditAuthorisationPage";
+import CreatePersonnelPage from "../CreatePersonnelPage/CreatePersonnelPage";
 import EditPersonnelPage from "../EditPersonnelPage/EditPersonnelPage";
-import NavBar from "../../../src/components/NavBar";
+import QualificationsPage from "../QualificationsPage/QualificationsPage";
+import NavBar from "../../../src/components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 import debug from "debug";
 const log = debug("pern:pages:App:App");
@@ -14,7 +17,6 @@ const log = debug("pern:pages:App:App");
 //TODO remove after testing out Outlet
 import NewOrderPage from "../NewOrderPage/NewOrderPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
-import CreatePersonnelPage from "../CreatePersonnelPage/CreatePersonnelPage";
 
 function App() {
 	const [user, setUser] = useState(getUser());
@@ -33,10 +35,16 @@ function App() {
 							<Route path='/personnel/:personId' element={<PersonnelDetailsPage />} />
 							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />} />
 							<Route path='/authorisation' element={<AuthoriseRecordsPage />} />
-							<Route path='/authorisation/:personId/new' element={<AddAuthorisationPage />} />
-							{/* Opened up Route to allow use of Outlet, allows 2 Routes to be displayed. this path is /orders2/new*/}
-							<Route path='/orders2' element={<OrderHistoryPage />}>
-								<Route path='new' element={<NewOrderPage />} />
+							{/* <Route path='/qualifications' element={<QualificationsPage />} /> */}
+							<Route
+								path='/personnel/:personId/authorisation/new'
+								element={<AddAuthorisationPage />}>
+								<Route path='' element={<QualificationsPage />} />
+							</Route>
+							<Route
+								path='/personnel/:personId/authorisation/:athId'
+								element={<EditAuthorisationPage />}>
+								<Route path='' element={<QualificationsPage />} />
 							</Route>
 						</Routes>
 					</>
