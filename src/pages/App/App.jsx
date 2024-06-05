@@ -14,10 +14,6 @@ import { getUser } from "../../utilities/users-service";
 import debug from "debug";
 const log = debug("pern:pages:App:App");
 
-//TODO remove after testing out Outlet
-import NewOrderPage from "../NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
-
 function App() {
 	const [user, setUser] = useState(getUser());
 	log("user %o", user);
@@ -36,6 +32,7 @@ function App() {
 							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />} />
 							<Route path='/authorisation' element={<AuthoriseRecordsPage />} />
 							{/* <Route path='/qualifications' element={<QualificationsPage />} /> */}
+							{/* use this for later, when creating admin landing page */}
 							<Route
 								path='/personnel/:personId/authorisation/new'
 								element={<AddAuthorisationPage />}>

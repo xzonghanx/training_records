@@ -20,7 +20,7 @@ export default function QualificationsPage() {
 
 	return (
 		<>
-			<h1>Qualifications Page</h1>
+			<h1>Qualifications Chart</h1>
 
 			<table>
 				<thead>

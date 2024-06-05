@@ -1,5 +1,5 @@
 const pool = require("../../config/database");
-// const debug = require("debug")("pern:controllers:api:authorisationController");
+const debug = require("debug")("pern:controllers:api:authorisationController");
 
 const create = async (req, res) => {
 	try {
@@ -67,22 +67,39 @@ const edit = async (req, res) => {
 	}
 };
 
-//TODO select all and sign (include WHERE ... )
-//TODO setup if to change query text based on user type (instructor or trainingIC or OIC)
 const sign = async (req, res) => {
+	debug("body", req.body);
+	const { user, athId } = req.body;
+	debug("user", user);
+	debug("athId", athId);
+	let signer = "";
+	if (user.u_appt === "oic") {
+		signer = "officer";
+	} else if (user.u_appt === "trainingIC") {
+		signer = "trainingic";
+	} else if (user.u_appt === "instructor") {
+		signer = "instructor";
+	}
+
 	try {
-		const { id } = req.params; //personnelID
-		const { userId, qCode } = req.body; //should i use q_id or q_name or q_code
-		//TODO change to WHERE ath_id=$
+		// debug("signer", signer);
+		// const query = `
+		// 	UPDATE authorisation SET
+		// 	${signer}_sign=$1,
+		// 	${signer}_ts=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore'
+		// 	WHERE ath_id=$2
+		// 	RETURNING *`;
 		const query = `
-			UPDATE authorisation SET 
-			training_ic_endorsement=$1, 
-			training_ic_endorsement_timestamp=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore' 
-			WHERE p_id=$2 AND q_code=$3
+			UPDATE authorisation SET
+			${signer}_sign=$1,
+			${signer}_ts=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore'
+			WHERE ath_id=ANY($2::int[])
 			RETURNING *`;
 		//might have conflict between date UTC timezone and SG timezone
-		const values = [userId, id, qCode];
+		const values = [user.u_sign, athId];
+		// const values = [user.u_name, athId]; //TODO switch to this after amending schema
 		const result = await pool.query(query, values);
+		debug("result", result.rows[0]);
 		res.status(200).json(result.rows);
 	} catch (err) {
 		console.error("Error executing query", err.stack);

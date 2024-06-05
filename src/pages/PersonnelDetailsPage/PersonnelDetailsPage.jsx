@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { getUser } from "../../utilities/users-service";
 import { fetchOnePersonnel, deleteOnePerson } from "../../utilities/personnel-service";
+import { signRecord } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelDetailsPage");
@@ -9,7 +11,7 @@ export default function PersonnelDetailsPage() {
 	const [personnel, setPersonnel] = useState([]);
 	const { personId } = useParams();
 	const navigate = useNavigate();
-	// const user = getUser();
+	const user = getUser();
 
 	useEffect(() => {
 		const getPersonnel = async () => {
@@ -34,8 +36,14 @@ export default function PersonnelDetailsPage() {
 		navigate(`/personnel/${personId}/authorisation/${athId}`);
 	};
 
-	//TODO ADD EDIT+DELETE AUTHORISATION (one)
+	//TODO DELETE AUTHORISATION (one)
 	//TODO sign authorisation (one)
+
+	const handleSign = async (ath_id) => {
+		const athId = [ath_id];
+		const response = await signRecord({ athId, user });
+		log("signed, %o", response);
+	};
 
 	return (
 		<>
@@ -117,6 +125,15 @@ export default function PersonnelDetailsPage() {
 							<td>{person?.trainingic_ts}</td>
 							<td>{person?.officer_sign}</td>
 							<td>{person?.officer_ts}</td>
+							<td>
+								<button
+									onClick={(e) => {
+										e.stopPropagation();
+										handleSign(person.ath_id);
+									}}>
+									sign
+								</button>
+							</td>
 						</tr>
 					))}
 				</tbody>

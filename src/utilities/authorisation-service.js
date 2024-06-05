@@ -15,3 +15,7 @@ export const addAuthorisation = async (data) => {
 export const editAuthorisation = async (athId, data) => {
 	return await authorisationAPI.editAuthorisation(athId, data);
 };
+
+export const signRecord = async (athId, user) => {
+	return await authorisationAPI.signRecord(athId, user);
+};

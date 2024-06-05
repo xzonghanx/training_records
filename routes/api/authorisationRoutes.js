@@ -13,9 +13,9 @@ router.get("/qualifications", qualificationCtrl.index);
 
 router.get("/:athId", authorisationCtrl.show);
 router.put("/:athId", authorisationCtrl.edit);
+// router.patch("/:athid/sign", authorisationCtrl.sign); //uses params
 
 //CHANGE TO FOLLOW RESTFULAPI, USE ATHID, PUT PERSONID IN BODY.
 // router.delete("/:athid"", authorisationCtrl.delete");
-router.patch("/:athid/sign", authorisationCtrl.sign); //uses params
 
 module.exports = router;

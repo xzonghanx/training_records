@@ -17,3 +17,7 @@ export function addAuthorisation(data) {
 export function editAuthorisation(athId, data) {
 	return sendRequest(`${AUTHORISATION_URL}/${athId}`, "PUT", data);
 }
+
+export const signRecord = async (athId, user) => {
+	return sendRequest(`${AUTHORISATION_URL}/sign`, "PATCH", athId, user);
+};

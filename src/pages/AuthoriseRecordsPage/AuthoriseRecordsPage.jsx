@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchAllPersonnel } from "../../utilities/personnel-service"; //TODO update to authorisation??
 import { getUser } from "../../utilities/users-service";
+import { signRecord } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:AuthoriseRecordsPage");
@@ -9,7 +10,6 @@ export default function AuthoriseRecordsPage() {
 	const [records, setRecords] = useState([]);
 	const [selectedIds, setSelectedIds] = useState([]);
 	const user = getUser();
-	log("user %o:", user); //PASS into sign?
 
 	//TODO set state for filters then search based on filters.
 	//create filtered state for records. (select option to set)
@@ -39,8 +39,11 @@ export default function AuthoriseRecordsPage() {
 
 	//TODO also change then sign_id, just use name?
 	//TODO sign one or sign many
-	const handleSign = () => {
-		log("sign");
+	const handleSign = async () => {
+		log("selectedIds, %o", selectedIds);
+		const athId = selectedIds;
+		const response = await signRecord({ athId, user });
+		log("signed, %o", response);
 	};
 
 	//TODO delete authorisations
@@ -48,6 +51,7 @@ export default function AuthoriseRecordsPage() {
 	return (
 		<>
 			<h1>Authorise Records page</h1>
+			<button onClick={handleSign}>Sign Selected</button>
 			<table>
 				<thead>
 					<tr>
@@ -68,11 +72,12 @@ export default function AuthoriseRecordsPage() {
 						<th>Training IC Timestamp</th>
 						<th>Officer-in-Charge Sign-off</th>
 						<th>Officer-in-Charge Timestamp</th>
+						<th>Select</th>
 					</tr>
 				</thead>
 				<tbody>
 					{records.map((person) => (
-						<tr key={person.person_id}>
+						<tr key={person.ath_id}>
 							<td>{person.person_id}</td>
 							<td>{person.name}</td>
 							<td>{person.unit}</td>
@@ -93,12 +98,9 @@ export default function AuthoriseRecordsPage() {
 							<td>
 								<input
 									type='checkbox'
-									checked={selectedIds.includes(person.person_id)}
-									onChange={() => handleCheckboxChange(person.person_id)}
+									checked={selectedIds.includes(person.ath_id)}
+									onChange={() => handleCheckboxChange(person.ath_id)}
 								/>
-							</td>
-							<td>
-								<button onClick={() => handleSign(person.person_id)}>sign</button>
 							</td>
 						</tr>
 					))}

@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPerson, editPerson } from "../../utilities/personnel-service";
-import { fetchAllQualifications } from "../../utilities/authorisation-service";
+// import { fetchAllQualifications } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelForm");
 
 export default function PersonnelForm({ person, setPerson, personId }) {
-	const [qualifications, setQualifications] = useState([]);
+	// const [qualifications, setQualifications] = useState([]);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const getAllQualifications = async () => {
-			try {
-				const data = await fetchAllQualifications();
-				setQualifications(data);
-			} catch (error) {
-				log("error getting qualifications", error);
-			}
-		};
-		getAllQualifications();
-	}, []);
+	// useEffect(() => {
+	// 	const getAllQualifications = async () => {
+	// 		try {
+	// 			const data = await fetchAllQualifications();
+	// 			setQualifications(data);
+	// 		} catch (error) {
+	// 			log("error getting qualifications", error);
+	// 		}
+	// 	};
+	// 	getAllQualifications();
+	// }, []);
 	// log("allQualifications: %o", qualifications);
 
 	const handleSave = async (e) => {
