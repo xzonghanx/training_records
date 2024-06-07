@@ -8,6 +8,8 @@ import moment from "moment-timezone";
 import debug from "debug";
 const log = debug("pern:pages:PersonnelDetailsPage");
 
+//TODO search for user function. --> by query or
+
 export default function PersonnelDetailsPage() {
 	const [personnel, setPersonnel] = useState([]);
 	const { personId } = useParams();

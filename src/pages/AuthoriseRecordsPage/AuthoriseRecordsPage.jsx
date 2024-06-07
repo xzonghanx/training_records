@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchAllPersonnel } from "../../utilities/personnel-service";
-import { getUser, fetchUsers, fetchFilterOptions } from "../../utilities/users-service";
+import { getUser, fetchUsers } from "../../utilities/users-service";
 import { signRecord, deleteRecords } from "../../utilities/authorisation-service";
+import Filters from "../../components/Filters/Filters";
 import moment from "moment-timezone";
 
 import debug from "debug";
@@ -13,38 +14,58 @@ export default function AuthoriseRecordsPage() {
 	const user = getUser();
 	const [users, setUsers] = useState();
 
-	//TODO set state for filters then search based on filters.
-	//create filtered state for records. (select option to set)
-	//then map filteredrecords
-	const [teamFilter, setTeamFilter] = useState("");
-	const [qCodeFilter, setQCodeFilter] = useState("");
-	const [qTypeFilter, setQTypeFilter] = useState("");
-	const [signingFieldFilter, setSigningFieldFilter] = useState("");
-	const [filterOptions, setFilterOptions] = useState({
-		teamOptions: [],
-		qCodeOptions: [],
-		qTypeOptions: [],
+	const [filters, setFilters] = useState({
+		unit: "",
+		vocation: "",
+		team: "",
+		qCode: "",
+		qType: "",
+		instSigningField: "",
+		trgSigningField: "",
+		offSigningField: "",
+		sortQDate: "desc",
 	});
 
-	// const handleTeamFilterChange = (e) => setTeamFilter(e.target.value);
-	// const handleQCodeFilterChange = (e) => setQCodeFilter(e.target.value);
-	// const handleQTypeFilterChange = (e) => setQTypeFilter(e.target.value);
-	// const handleSigningFieldFilterChange = (e) => setSigningFieldFilter(e.target.value);
+	const filterAndSortRecords = (records, filters) => {
+		let filteredRecords = records.filter((record) => {
+			const matchesUnit = !filters.unit || record.unit?.includes(filters.unit);
+			const matchesVocation = !filters.vocation || record.vocation?.includes(filters.vocation);
+			const matchesTeam = !filters.team || record.team?.includes(filters.team);
+			const matchesQCode = !filters.qCode || record.q_code?.includes(filters.qCode);
+			const matchesQType = !filters.qType || record.q_type?.includes(filters.qType);
 
-	const filterRecords = (record) => {
-		const matchesTeam = !teamFilter || record.team?.includes(teamFilter);
-		const matchesQCode = !qCodeFilter || record.q_code?.includes(qCodeFilter);
-		const matchesQType = !qTypeFilter || record.q_type?.includes(qTypeFilter);
-		const matchesSigningField =
-			!signingFieldFilter ||
-			(signingFieldFilter === "signed" ? record.officer_sign : !record.officer_sign); //TODO apply to all 3 fields or based on user logged in.
+			const matchesInstSigningField =
+				!filters.instSigningField ||
+				(filters.instSigningField === "signed" ? record.instructor_sign : !record.instructor_sign);
+			const matchesTrgSigningField =
+				!filters.trgSigningField ||
+				(filters.trgSigningField === "signed" ? record.trainingIC_sign : !record.trainingIC_sign);
+			const matchesOffSigningField =
+				!filters.offSigningField ||
+				(filters.offSigningField === "signed" ? record.officer_sign : !record.officer_sign);
 
-		return matchesTeam && matchesQCode && matchesQType && matchesSigningField;
+			return (
+				matchesUnit &&
+				matchesVocation &&
+				matchesTeam &&
+				matchesQCode &&
+				matchesQType &&
+				matchesInstSigningField &&
+				matchesTrgSigningField &&
+				matchesOffSigningField
+			);
+		});
+
+		filteredRecords.sort((a, b) => {
+			const dateA = new Date(a.q_date);
+			const dateB = new Date(b.q_date);
+			return filters.sortQDate === "asc" ? dateA - dateB : dateB - dateA;
+		});
+
+		return filteredRecords;
 	};
 
-	const filteredRecords = records.filter(filterRecords);
-
-	//TODO filter functions (above)
+	const filteredRecords = filterAndSortRecords(records, filters);
 
 	useEffect(() => {
 		const getAllRecords = async () => {
@@ -65,17 +86,8 @@ export default function AuthoriseRecordsPage() {
 				log("error getting users", error);
 			}
 		};
-		const getFilterOptions = async () => {
-			try {
-				const data = await fetchFilterOptions();
-				setFilterOptions(data);
-			} catch (error) {
-				log("error getting filter options", error);
-			}
-		};
 		getUsers();
 		getAllRecords();
-		getFilterOptions();
 	}, []);
 
 	const handleCheckboxChange = (id) => {
@@ -107,52 +119,6 @@ export default function AuthoriseRecordsPage() {
 	return (
 		<>
 			<h1>Authorise Records page</h1>
-			{/* //TODO testing filters below --> change to SELECT OPTION type, but get all available options in initial state, add html labels.*/}
-			<div>
-				{/* <input placeholder='Filter by team' value={teamFilter} onChange={handleTeamFilterChange} />
-				<input
-					placeholder='Filter by Q Code'
-					value={qCodeFilter}
-					onChange={handleQCodeFilterChange}
-				/>
-				<input
-					placeholder='Filter by Q Type'
-					value={qTypeFilter}
-					onChange={handleQTypeFilterChange}
-				/> */}
-				<select value={teamFilter} onChange={(e) => setTeamFilter(e.target.value)}>
-					<option value=''>All Teams</option>
-					{filterOptions.teamOptions.map((option) => (
-						<option key={option.team} value={option.team}>
-							{option.team}
-						</option>
-					))}
-				</select>
-				<select value={qCodeFilter} onChange={(e) => setQCodeFilter(e.target.value)}>
-					<option value=''>All Q Codes</option>
-					{filterOptions.qCodeOptions.map((option) => (
-						<option key={option.q_code} value={option.q_code}>
-							{option.q_code}
-						</option>
-					))}
-				</select>
-				<select value={qTypeFilter} onChange={(e) => setQTypeFilter(e.target.value)}>
-					<option value=''>All Q Types</option>
-					{filterOptions.qTypeOptions.map((option) => (
-						<option key={option.q_type} value={option.q_type}>
-							{option.q_type}
-						</option>
-					))}
-				</select>
-				<select value={signingFieldFilter} onChange={(e) => setSigningFieldFilter(e.target.value)}>
-					<option value=''>All</option>
-					<option value='signed'>Signed</option>
-					<option value='not_signed'>Not Signed</option>
-				</select>
-			</div>
-			{/* //TODO testing filters above; if it works can put the filter SELECT as a ROW between thead and tbody */}
-			<br />
-
 			<button onClick={handleSign}>Sign Selected</button>
 			<button onClick={handleDelete}>Delete Selected</button>
 			<table>
@@ -177,16 +143,16 @@ export default function AuthoriseRecordsPage() {
 						<th>Officer-in-Charge Timestamp</th>
 						<th>Select</th>
 					</tr>
+					<Filters filters={filters} setFilters={setFilters} />
 				</thead>
 				<tbody>
-					{/* //TODO records.map */}
 					{filteredRecords.map((person) => (
 						<tr key={person.ath_id}>
 							<td>{person.person_id}</td>
 							<td>{person.name}</td>
-							<td>{person.unit}</td>
-							<td>{person.vocation}</td>
-							<td>{person.team}</td>
+							<td>{person?.unit}</td>
+							<td>{person?.vocation}</td>
+							<td>{person?.team}</td>
 							<td>{person?.q_code}</td>
 							<td>{person?.q_type}</td>
 							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>

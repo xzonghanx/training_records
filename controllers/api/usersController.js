@@ -64,10 +64,15 @@ const login = async (req, res) => {
 
 const filters = async (req, res) => {
 	try {
+		const unitOptions = await pool.query("SELECT DISTINCT unit FROM personnel");
+		const vocationOptions = await pool.query("SELECT DISTINCT vocation FROM personnel");
 		const teamOptions = await pool.query("SELECT DISTINCT team FROM personnel");
 		const qCodeOptions = await pool.query("SELECT DISTINCT q_code FROM authorisation");
 		const qTypeOptions = await pool.query("SELECT DISTINCT q_type FROM authorisation");
+
 		res.json({
+			unitOptions: unitOptions.rows,
+			vocationOptions: vocationOptions.rows,
 			teamOptions: teamOptions.rows,
 			qCodeOptions: qCodeOptions.rows,
 			qTypeOptions: qTypeOptions.rows,
