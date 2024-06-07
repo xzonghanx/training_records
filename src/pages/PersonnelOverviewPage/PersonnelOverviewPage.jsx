@@ -1,32 +1,38 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { fetchAllPersonnel } from "../../utilities/personnel-service";
+import { fetchSearchedPersonnel } from "../../utilities/personnel-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelOverviewPage");
 
 export default function PersonnelOverviewPage() {
 	const [allPersonnel, setAllPersonnel] = useState([]);
+	const [searchQuery, setSearchQuery] = useState("");
 	const navigate = useNavigate();
-	// const user = getUser();
+	// const user = getUser(); //TODO to use for superadmin / signature.
 
-	//TODO fetchAllPersonnel needs to remvoe duplicates of name --> only select latest authorisation.
+	//fetchAllPersonnel needs to remove duplicates of name --> only select latest authorisation; can calculate currency lv
+	//TODO done in server side, put in more data to verify
 
 	useEffect(() => {
-		const getAllPersonnel = async () => {
+		const getSearchPersonnel = async () => {
 			try {
-				const data = await fetchAllPersonnel();
-				// log("getAllPersonnel: %o", data);
+				const data = await fetchSearchedPersonnel(searchQuery);
+				log("fetchSearchedPersonnel: %o", data);
 				setAllPersonnel(data);
 			} catch (error) {
-				log("error getting nominal roll", error);
+				log("error fetching searched personnel", error);
 			}
 		};
-		getAllPersonnel();
-	}, []);
+		getSearchPersonnel();
+	}, [searchQuery]);
 
 	const handleClickRow = (personId) => {
 		navigate(`/personnel/${personId}`);
+	};
+
+	const handleSearchChange = (e) => {
+		setSearchQuery(e.target.value);
 	};
 
 	return (
@@ -36,6 +42,13 @@ export default function PersonnelOverviewPage() {
 			<div>
 				<Link to='/personnel/new'>Create New Personnel</Link>
 			</div>
+
+			<input
+				type='text'
+				placeholder='Search by Name or NRIC'
+				value={searchQuery}
+				onChange={handleSearchChange}
+			/>
 
 			<table>
 				<thead>
@@ -69,8 +82,7 @@ export default function PersonnelOverviewPage() {
 							<td>{person.team}</td>
 							<td>{person?.q_code}</td>
 							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
-							{/* //TODO need to change to latest date*/}
-							<td>CL X</td> {/* //TODOneed to change to derive CL based on latest Q date*/}
+							<td>{person?.currency_lvl}</td>
 						</tr>
 					))}
 				</tbody>

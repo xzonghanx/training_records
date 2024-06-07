@@ -8,6 +8,10 @@ export const fetchOnePersonnel = async (personId) => {
 	return await personnelAPI.fetchOnePersonnel(personId);
 };
 
+export const fetchSearchedPersonnel = async (query) => {
+	return await personnelAPI.fetchSearchedPersonnel(query);
+};
+
 export const addPerson = async (data) => {
 	return await personnelAPI.addPerson(data);
 };

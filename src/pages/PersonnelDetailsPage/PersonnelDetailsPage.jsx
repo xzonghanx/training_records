@@ -8,8 +8,6 @@ import moment from "moment-timezone";
 import debug from "debug";
 const log = debug("pern:pages:PersonnelDetailsPage");
 
-//TODO search for user function. --> by query or
-
 export default function PersonnelDetailsPage() {
 	const [personnel, setPersonnel] = useState([]);
 	const { personId } = useParams();
@@ -92,8 +90,8 @@ export default function PersonnelDetailsPage() {
 						<td>{personnel[0]?.vocation}</td>
 						<td>{personnel[0]?.team}</td>
 						<td>{personnel[0]?.q_code}</td>
-						<td>{personnel[0]?.q_date}</td> {/* //TODO need to change to latest date*/}
-						<td>CL X </td> {/* //TODO need to change to derive CL based on latest Q date*/}
+						<td>{new Date(personnel[0]?.latest_q_date).toLocaleDateString()}</td>
+						<td>{personnel[0]?.currency_lvl}</td>
 					</tr>
 				</tbody>
 			</table>

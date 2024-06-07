@@ -5,6 +5,9 @@ const PERSONNEL_URL = "/api/personnel";
 export function fetchAllPersonnel() {
 	return sendRequest(PERSONNEL_URL, "GET");
 }
+export function fetchSearchedPersonnel(query) {
+	return sendRequest(`${PERSONNEL_URL}/search?search=${query}`, "GET");
+}
 
 export function fetchOnePersonnel(personId) {
 	return sendRequest(`${PERSONNEL_URL}/${personId}`, "GET");
