@@ -13,6 +13,10 @@ export function fetchOnePersonnel(personId) {
 	return sendRequest(`${PERSONNEL_URL}/${personId}`, "GET");
 }
 
+export function fetchTeams() {
+	return sendRequest(`${PERSONNEL_URL}/teams`, "GET");
+}
+
 export function addPerson(data) {
 	return sendRequest(PERSONNEL_URL, "POST", data);
 }

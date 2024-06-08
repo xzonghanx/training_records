@@ -13,6 +13,8 @@ export default function NavBar({ setUser }) {
 			&nbsp; | &nbsp;
 			<NavLink to='/authorisation'>Authorise Records</NavLink>
 			&nbsp; | &nbsp;
+			<NavLink to='/qualifications'>Qualifcations</NavLink>
+			&nbsp; | &nbsp;
 			<NavLink to='' onClick={handleLogout}>
 				Logout
 			</NavLink>

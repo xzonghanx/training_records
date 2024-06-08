@@ -51,26 +51,43 @@ const search = async (req, res) => {
 	}
 };
 
-// const currency = async (req, res) => {
-// 	try {
-// 		let query = `
-// 			SELECT a.p_id, MAX(a.q_date) as latest_q_date,
-// 			CASE
-// 				WHEN (CURRENT_DATE - MAX(a.q_date)) < 365 THEN 'CL1'
-// 				WHEN (CURRENT_DATE - MAX(a.q_date)) < 730 THEN 'CL2'
-// 				WHEN (CURRENT_DATE - MAX(a.q_date)) < 1095 THEN 'CL3'
-// 				ELSE 'lapse'
-// 			END AS currency_level
-// 			FROM authorisation a
-// 			GROUP BY a.p_id
-// 		`;
-// 		const result = await pool.query(query);
-// 		res.status(200).json(result.rows);
-// 	} catch (err) {
-// 		console.error("Error executing query", err.stack);
-// 		res.status(500).json({ err });
-// 	}
-// };
+/*
+const currency = async (req, res) => {
+	try {
+		let query = `
+			SELECT a.p_id, MAX(a.q_date) as latest_q_date,
+			CASE
+				WHEN (CURRENT_DATE - MAX(a.q_date)) < 365 THEN 'CL1'
+				WHEN (CURRENT_DATE - MAX(a.q_date)) < 730 THEN 'CL2'
+				WHEN (CURRENT_DATE - MAX(a.q_date)) < 1095 THEN 'CL3'
+				ELSE 'lapse'
+			END AS currency_level
+			FROM authorisation a
+			GROUP BY a.p_id
+		`;
+		const result = await pool.query(query);
+		res.status(200).json(result.rows);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
+*/
+
+const teams = async (req, res) => {
+	try {
+		const query = `
+			SELECT team, COUNT(*) as team_count
+			FROM personnel
+			GROUP BY team
+		`;
+		const result = await pool.query(query);
+		res.status(200).json(result.rows);
+	} catch (err) {
+		console.error("Error executing query", err.stack);
+		res.status(500).json({ err });
+	}
+};
 
 const show = async (req, res) => {
 	try {
@@ -217,4 +234,5 @@ module.exports = {
 	removeMany,
 	updateORD,
 	// currency,
+	teams,
 };

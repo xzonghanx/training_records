@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use("/api/users", require("./routes/api/usersRoutes"));
 app.use("/api/personnel", require("./routes/api/personnelRoutes"));
 app.use("/api/authorisation", require("./routes/api/authorisationRoutes"));
+app.use("/api/qualification", require("./routes/api/qualificationRoutes"));
 
 // The following "catch all" route (note the *) is necessary to return the index.html on all non-AJAX requests
 app.get("/*", function (req, res) {

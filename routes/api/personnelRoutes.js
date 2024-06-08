@@ -8,7 +8,8 @@ const personCtrl = require("../../controllers/api/personnelController");
 router.post("/", personCtrl.create);
 router.get("/", personCtrl.index);
 router.get("/search", personCtrl.search);
-// router.get("/currency", personCtrl.currency); //TODO TESTING
+router.get("/teams", personCtrl.teams);
+// router.get("/currency", personCtrl.currency);
 router.delete("/", personCtrl.removeMany);
 
 router.get("/:id", personCtrl.show);

@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
-import { fetchAllQualifications } from "../../utilities/authorisation-service";
+import { useNavigate } from "react-router-dom";
+import { fetchAllQualifications } from "../../utilities/qualification-service";
+import { getUser } from "../../utilities/users-service";
 
 import debug from "debug";
 const log = debug("pern:pages:QualificationsPage");
 
 export default function QualificationsPage() {
 	const [qualifications, setQualifications] = useState([]);
+	const user = getUser();
+	// log("user", user);
+	const isAdmin = user.u_appt === ("oic" || "admin");
+	// log("user", isAdmin);
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const getAllQualifications = async () => {
 			try {
@@ -18,9 +26,17 @@ export default function QualificationsPage() {
 		getAllQualifications();
 	}, []);
 
+	const handleClickRow = (q_id) => {
+		isAdmin ? navigate(`/qualifications/${q_id}/edit`) : log("no access rights");
+	};
+
 	return (
 		<>
 			<h1>Qualifications Chart</h1>
+
+			{isAdmin ? (
+				<button onClick={() => navigate("/qualifications/new")}>add courses</button>
+			) : null}
 
 			<table>
 				<thead>
@@ -34,7 +50,10 @@ export default function QualificationsPage() {
 				</thead>
 				<tbody>
 					{qualifications.map((qual) => (
-						<tr key={qual.q_id}>
+						<tr
+							key={qual.q_id}
+							onClick={() => handleClickRow(qual.q_id)}
+							style={{ cursor: "pointer" }}>
 							<td>{qual?.q_name}</td>
 							<td>{qual?.q_code}</td>
 							<td>{qual?.task1}</td>

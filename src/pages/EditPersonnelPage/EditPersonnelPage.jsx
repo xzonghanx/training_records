@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Outlet } from "react-router-dom";
 import { fetchOnePersonnel } from "../../utilities/personnel-service";
 import PersonnelForm from "../../components/PersonnelForm/PersonnelForm";
 import moment from "moment-timezone";
@@ -32,6 +32,7 @@ export default function EditPersonnelPage() {
 		<>
 			<h1>Edit Personnel Page</h1>
 			<PersonnelForm person={person} setPerson={setPerson} personId={personId} />
+			<Outlet />
 		</>
 	);
 }

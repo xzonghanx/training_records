@@ -9,6 +9,8 @@ import EditAuthorisationPage from "../EditAuthorisationPage/EditAuthorisationPag
 import CreatePersonnelPage from "../CreatePersonnelPage/CreatePersonnelPage";
 import EditPersonnelPage from "../EditPersonnelPage/EditPersonnelPage";
 import QualificationsPage from "../QualificationsPage/QualificationsPage";
+import AmendQualificationsPage from "../AmendQualificationsPage/AmendQualificationsPage";
+import TeamsPage from "../TeamsPage/TeamsPage";
 import NavBar from "../../../src/components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 import debug from "debug";
@@ -16,6 +18,7 @@ const log = debug("pern:pages:App:App");
 
 function App() {
 	const [user, setUser] = useState(getUser());
+	// const isAdmin = (user.u_appt === 'admin')
 	log("user %o", user);
 
 	return (
@@ -27,12 +30,14 @@ function App() {
 						<NavBar setUser={setUser} />
 						<Routes>
 							<Route path='/personnel' element={<PersonnelOverviewPage />} />
-							<Route path='/personnel/new' element={<CreatePersonnelPage />} />
+							<Route path='/personnel/new' element={<CreatePersonnelPage />}>
+								<Route path='' element={<TeamsPage />} />
+							</Route>
 							<Route path='/personnel/:personId' element={<PersonnelDetailsPage />} />
-							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />} />
+							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />}>
+								<Route path='' element={<TeamsPage />} />
+							</Route>
 							<Route path='/authorisation' element={<AuthoriseRecordsPage />} />
-							{/* <Route path='/qualifications' element={<QualificationsPage />} /> */}
-							{/* use this for later, when creating admin landing page */}
 							<Route
 								path='/personnel/:personId/authorisation/new'
 								element={<AddAuthorisationPage />}>
@@ -43,6 +48,9 @@ function App() {
 								element={<EditAuthorisationPage />}>
 								<Route path='' element={<QualificationsPage />} />
 							</Route>
+							<Route path='/qualifications' element={<QualificationsPage />} />
+							<Route path='/qualifications/new' element={<AmendQualificationsPage />} />
+							<Route path='/qualifications/:q_id/edit' element={<AmendQualificationsPage />} />
 						</Routes>
 					</>
 				) : (

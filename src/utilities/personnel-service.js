@@ -12,6 +12,10 @@ export const fetchSearchedPersonnel = async (query) => {
 	return await personnelAPI.fetchSearchedPersonnel(query);
 };
 
+export const fetchTeams = async () => {
+	return await personnelAPI.fetchTeams();
+};
+
 export const addPerson = async (data) => {
 	return await personnelAPI.addPerson(data);
 };
