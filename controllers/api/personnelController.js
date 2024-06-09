@@ -26,7 +26,7 @@ const search = async (req, res) => {
 					WHEN (CURRENT_DATE - (a.q_date)) < 365 THEN 'CL1'
 					WHEN (CURRENT_DATE - (a.q_date)) < 730 THEN 'CL2'
 					WHEN (CURRENT_DATE - (a.q_date)) < 1095 THEN 'CL3'
-					WHEN (CURRENT_DATE - (a.q_date)) >= 1095 THEN 'lapse'
+					WHEN (CURRENT_DATE - (a.q_date)) >= 1095 THEN 'Lapse'
 					ELSE 'Not qualified yet'
 				END AS currency_lvl
 			FROM personnel p
@@ -34,8 +34,9 @@ const search = async (req, res) => {
 				SELECT a.p_id, MAX(a.q_date) as latest_q_date
 				FROM authorisation a
 				GROUP BY a.p_id
-			) latest_authorisation ON p.person_id = latest_authorisation.p_id
-			LEFT JOIN authorisation a ON p.person_id = a.p_id AND a.q_date = latest_authorisation.latest_q_date
+				) latest_authorisation ON p.person_id = latest_authorisation.p_id
+				LEFT JOIN authorisation a ON p.person_id = a.p_id AND a.q_date = latest_authorisation.latest_q_date
+			
 		`;
 		let values = [];
 		if (search) {

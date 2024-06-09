@@ -3,6 +3,7 @@ const path = require("path");
 const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
+require("./config/cronJobs");
 const debug = require("debug")("pern:server");
 
 const app = express();

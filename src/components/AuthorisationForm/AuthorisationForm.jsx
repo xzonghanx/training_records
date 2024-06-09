@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-	fetchAllQualifications,
-	addAuthorisation,
-	editAuthorisation,
-} from "../../utilities/authorisation-service";
+import { addAuthorisation, editAuthorisation } from "../../utilities/authorisation-service";
+import { fetchAllQualifications } from "../../utilities/qualification-service";
 import debug from "debug";
 const log = debug("pern:pages:AuthorisationForm");
 

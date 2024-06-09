@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { fetchSearchedPersonnel } from "../../utilities/personnel-service";
+import PersonnelFilters from "../../components/Filters/PersonnelFilters";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelOverviewPage");
@@ -9,10 +10,33 @@ export default function PersonnelOverviewPage() {
 	const [allPersonnel, setAllPersonnel] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const navigate = useNavigate();
-	// const user = getUser(); //TODO to use for superadmin / signature.
+	const [filters, setFilters] = useState({
+		unit: "",
+		service: "",
+		vocation: "",
+		team: "",
+		qCode: "",
+		currencyLvl: "",
+	});
 
-	//fetchAllPersonnel needs to remove duplicates of name --> only select latest authorisation; can calculate currency lv
-	//TODO done in server side, put in more data to verify
+	const filteredPersonnel = allPersonnel.filter((person) => {
+		const matchesUnit = !filters.unit || person.unit?.includes(filters.unit);
+		const matchesService = !filters.service || person.service?.includes(filters.vocation);
+		const matchesVocation = !filters.vocation || person.vocation?.includes(filters.vocation);
+		const matchesTeam = !filters.team || person.team?.includes(filters.team);
+		const matchesQCode = !filters.qCode || person.q_code?.includes(filters.qCode);
+		const matchesCurrency =
+			!filters.currencyLvl || person.currency_lvl?.includes(filters.currencyLvl);
+
+		return (
+			matchesUnit &&
+			matchesService &&
+			matchesVocation &&
+			matchesTeam &&
+			matchesQCode &&
+			matchesCurrency
+		);
+	});
 
 	useEffect(() => {
 		const getSearchPersonnel = async () => {
@@ -42,13 +66,15 @@ export default function PersonnelOverviewPage() {
 			<div>
 				<Link to='/personnel/new'>Create New Personnel</Link>
 			</div>
-
+			<br />
 			<input
 				type='text'
 				placeholder='Search by Name or NRIC'
 				value={searchQuery}
 				onChange={handleSearchChange}
 			/>
+			<br />
+			<div></div>
 
 			<table>
 				<thead>
@@ -66,8 +92,9 @@ export default function PersonnelOverviewPage() {
 						<th>Currency Level</th>
 					</tr>
 				</thead>
+				<PersonnelFilters filters={filters} setFilters={setFilters} />
 				<tbody>
-					{allPersonnel.map((person, index) => (
+					{filteredPersonnel.map((person, index) => (
 						<tr
 							key={person.person_id}
 							onClick={() => handleClickRow(person.person_id)}

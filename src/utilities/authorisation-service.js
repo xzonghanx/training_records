@@ -1,9 +1,5 @@
 import * as authorisationAPI from "./authorisation-api";
 
-export const fetchAllQualifications = async () => {
-	return await authorisationAPI.fetchAllQualifications();
-};
-
 export const fetchOneAuthorisationRecord = async (athId) => {
 	return await authorisationAPI.fetchOneAuthorisationRecord(athId);
 };

@@ -69,17 +69,27 @@ const login = async (req, res) => {
 const filters = async (req, res) => {
 	try {
 		const unitOptions = await pool.query("SELECT DISTINCT unit FROM personnel");
+		const serviceOptions = await pool.query("SELECT DISTINCT service FROM personnel");
 		const vocationOptions = await pool.query("SELECT DISTINCT vocation FROM personnel");
 		const teamOptions = await pool.query("SELECT DISTINCT team FROM personnel");
 		const qCodeOptions = await pool.query("SELECT DISTINCT q_code FROM authorisation");
 		const qTypeOptions = await pool.query("SELECT DISTINCT q_type FROM authorisation");
+		const currencyLvlOptions = [
+			{ currency_lvl: "CL1" },
+			{ currency_lvl: "CL2" },
+			{ currency_lvl: "CL3" },
+			{ currency_lvl: "Lapse" },
+			{ currency_lvl: "Not qualified yet" },
+		];
 
 		res.json({
 			unitOptions: unitOptions.rows,
+			serviceOptions: serviceOptions.rows,
 			vocationOptions: vocationOptions.rows,
 			teamOptions: teamOptions.rows,
 			qCodeOptions: qCodeOptions.rows,
 			qTypeOptions: qTypeOptions.rows,
+			currencyLvlOptions: currencyLvlOptions,
 		});
 	} catch (err) {
 		console.error("Error fetching filter options", err.stack);
