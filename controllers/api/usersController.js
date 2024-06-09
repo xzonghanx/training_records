@@ -22,7 +22,11 @@ const index = async (req, res) => {
 const create = async (req, res) => {
 	try {
 		// debug("body: %o", req.body);
-		const { name, email, password, unit, appt } = req.body;
+		const { access, name, email, password, unit, appt } = req.body;
+		if (access !== ("admin" || "oic")) {
+			res.status(401).json("No access rights");
+			return;
+		}
 		const hashedPass = await bcrypt.hash(password, SALT_ROUNDS);
 		const text = `INSERT INTO users (u_name, u_email, u_pass, u_unit, u_appt) 
 			VALUES($1, $2, $3, $4, $5) 

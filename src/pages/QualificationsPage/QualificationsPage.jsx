@@ -9,9 +9,7 @@ const log = debug("pern:pages:QualificationsPage");
 export default function QualificationsPage() {
 	const [qualifications, setQualifications] = useState([]);
 	const user = getUser();
-	// log("user", user);
-	const isAdmin = user.u_appt === ("oic" || "admin");
-	// log("user", isAdmin);
+	const isAdmin = user?.u_appt === ("oic" || "admin");
 	const navigate = useNavigate();
 
 	useEffect(() => {

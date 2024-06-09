@@ -5,6 +5,7 @@ import {
 	addQualification,
 	editQualification,
 } from "../../utilities/qualification-service";
+import { getUser } from "../../utilities/users-service";
 import debug from "debug";
 const log = debug("pern:pages:AmendQualificationsPage");
 
@@ -12,6 +13,10 @@ export default function AmendQualificationsPage() {
 	const [qualification, setQualification] = useState([]);
 	const navigate = useNavigate();
 	const { q_id } = useParams();
+	const user = getUser();
+	const isAdmin = user?.u_appt === ("admin" || "oic"); //IF NOT ADMIN, REDIRECT AWAY?
+	// log(user);
+	// log(isAdmin);
 
 	useEffect(() => {
 		const getOneQualification = async () => {
@@ -22,13 +27,19 @@ export default function AmendQualificationsPage() {
 				log("error getting qualification", error);
 			}
 		};
-		getOneQualification();
-	}, [q_id]);
+		if (q_id) {
+			getOneQualification();
+		}
+		if (!isAdmin) {
+			navigate("/qualifications");
+		}
+	}, [q_id, isAdmin, navigate]);
 
 	const handleSave = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
+		data.user = user.u_appt; //passed u_appt to validate in server.
 		log("data, %o", data);
 		if (q_id) {
 			const response = await editQualification(q_id, data);

@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { fetchTeams } from "../../utilities/personnel-service";
 
 import debug from "debug";
-const log = debug("pern:pages:TeamsPage");
+const log = debug("pern:components:Teams");
 
-export default function TeamsPage() {
+export default function Teams() {
 	const [teams, setTeams] = useState([]);
 	useEffect(() => {
 		const getTeams = async () => {

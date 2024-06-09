@@ -1,9 +1,10 @@
 import { Component } from "react";
-import { signUp } from "../../utilities/users-service";
+import { signUp, getUser } from "../../utilities/users-service";
 import debug from "debug";
 const log = debug("pern:components:SignUpForm");
 
 export default class SignUpForm extends Component {
+	access = getUser();
 	state = {
 		name: "",
 		email: "",
@@ -21,12 +22,13 @@ export default class SignUpForm extends Component {
 	handleSubmit = async (event) => {
 		event.preventDefault();
 		const formData = { ...this.state };
+		formData.access = this.access.u_appt;
 		delete formData.error;
 
 		try {
 			const user = await signUp(formData);
 			log("user: %o", user); //get return from users-service
-			this.props.setUser(user);
+			// this.props.setUser(user);
 		} catch (error) {
 			this.setState({ error: "Sign Up Failed" });
 		}

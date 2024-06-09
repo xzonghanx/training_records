@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "dist")));
 
-// app.use(require("./config/checkToken").checkTokenMiddleware);
+app.use(require("./config/checkToken").checkTokenMiddleware);
 
 app.use("/api/users", require("./routes/api/usersRoutes"));
 app.use("/api/personnel", require("./routes/api/personnelRoutes"));

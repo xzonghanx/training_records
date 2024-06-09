@@ -3,7 +3,12 @@ const pool = require("../../config/database");
 
 const create = async (req, res) => {
 	try {
-		const { q_name, q_code, task1, task2, task3 } = req.body;
+		const { user, q_name, q_code, task1, task2, task3 } = req.body;
+		// debug("user", user);
+		if (user !== ("admin" || "oic")) {
+			res.status(401).json("No access rights");
+			return;
+		}
 		const query = `INSERT INTO qualification
 			 (q_name, q_code, task1, task2, task3) 
 			 VALUES($1, $2, $3, $4, $5)
@@ -20,7 +25,11 @@ const create = async (req, res) => {
 const edit = async (req, res) => {
 	try {
 		const { q_id } = req.params;
-		const { q_name, q_code, task1, task2, task3 } = req.body;
+		const { user, q_name, q_code, task1, task2, task3 } = req.body;
+		if (user !== ("admin" || "oic")) {
+			res.status(401).json("No access rights");
+			return;
+		}
 		const query = `
 			UPDATE qualification SET
 			q_name=$2, 
@@ -52,7 +61,13 @@ const index = async (req, res) => {
 const show = async (req, res) => {
 	try {
 		const { q_id } = req.params;
-		const result = await pool.query("SELECT * FROM qualification WHERE q_id=$1", [q_id]);
+		let query = "SELECT * FROM qualification ";
+		let values = [];
+		if (q_id) {
+			query += "WHERE q_id = $1";
+			values = [q_id];
+		}
+		const result = await pool.query(query, values);
 		res.status(200).json(result.rows[0]);
 	} catch (err) {
 		console.error("Error executing query", err.stack);

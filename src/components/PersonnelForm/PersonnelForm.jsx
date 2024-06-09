@@ -1,27 +1,11 @@
-// import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPerson, editPerson } from "../../utilities/personnel-service";
-// import { fetchAllQualifications } from "../../utilities/authorisation-service";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelForm");
 
 export default function PersonnelForm({ person, setPerson, personId }) {
-	// const [qualifications, setQualifications] = useState([]);
 	const navigate = useNavigate();
-
-	// useEffect(() => {
-	// 	const getAllQualifications = async () => {
-	// 		try {
-	// 			const data = await fetchAllQualifications();
-	// 			setQualifications(data);
-	// 		} catch (error) {
-	// 			log("error getting qualifications", error);
-	// 		}
-	// 	};
-	// 	getAllQualifications();
-	// }, []);
-	// log("allQualifications: %o", qualifications);
 
 	const handleSave = async (e) => {
 		e.preventDefault();
@@ -105,18 +89,6 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 					onChange={(evt) => setPerson({ ...person, team: evt.target.value })}
 				/>
 				<br />
-				{/* <label htmlFor='qualification'>Qualification</label>
-				<select
-					name='qualification'
-					onChange={(evt) => setPerson({ ...person, qualification: evt.target.value })}>
-					<option value={person?.qualification || ""}>{person?.qualification || ""}</option>
-					{qualifications?.map((qual) => (
-						<option key={qual?.q_id} value={qual?.q_code}>
-							{qual?.q_name}
-						</option>
-					))}
-				</select>
-				<br /> */}
 				<button type='submit'>SAVE</button>
 			</form>
 		</>

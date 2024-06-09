@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Outlet } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AuthorisationForm from "../../components/AuthorisationForm/AuthorisationForm";
 import { fetchOneAuthorisationRecord, deleteRecord } from "../../utilities/authorisation-service";
+import Teams from "../../components/Teams/Teams";
 import moment from "moment-timezone";
 import debug from "debug";
 const log = debug("pern:pages:EditAuthorisationPage");
@@ -45,7 +46,7 @@ export default function EditAuthorisationPage() {
 			/>
 			<br />
 			<button onClick={handleDelete}>DELETE Record</button>
-			<Outlet />
+			<Teams />
 		</>
 	);
 }
