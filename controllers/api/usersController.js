@@ -23,7 +23,7 @@ const create = async (req, res) => {
 	try {
 		// debug("body: %o", req.body);
 		const { access, name, email, password, unit, appt } = req.body;
-		if (access !== ("admin" || "oic")) {
+		if (access !== "admin" || access !== "oic") {
 			res.status(401).json("No access rights");
 			return;
 		}

@@ -72,7 +72,7 @@ export default function PersonnelOverviewPage() {
 			</div>
 			<br />
 			<input
-				className='border-opacity-60 border-slate-500 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-2 w-1/6 rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 my-2'
+				className='border-opacity-60 border-slate-500 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-2 w-1/6 rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 my-2'
 				type='text'
 				placeholder='Search by Name or NRIC'
 				value={searchQuery}
@@ -81,40 +81,88 @@ export default function PersonnelOverviewPage() {
 			<br />
 			<div></div>
 
-			<table>
-				<thead>
+			<table className='min-w-full divide-y divide-gray-200'>
+				<thead className='bg-gray-50'>
 					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>NRIC</th>
-						<th>Unit</th>
-						<th>ORD</th>
-						<th>Service</th>
-						<th>Vocation</th>
-						<th>Team</th>
-						<th>Qualification</th>
-						<th>Latest Authorisation Date</th>
-						<th>Currency Level</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							#
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Name
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							NRIC
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Unit
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							ORD
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Service
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Vocation
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Team
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Qualification
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Latest Authorisation Date
+						</th>
+						<th
+							scope='col'
+							className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Currency Level
+						</th>
 					</tr>
 				</thead>
 				<PersonnelFilters filters={filters} setFilters={setFilters} />
-				<tbody>
+				<tbody className='bg-white divide-y divide-gray-200'>
 					{filteredPersonnel.map((person, index) => (
 						<tr
 							key={person.person_id}
 							onClick={() => handleClickRow(person.person_id)}
 							style={{ cursor: "pointer" }}>
-							<td>{index + 1}</td>
-							<td>{person.name}</td>
-							<td>{person.nric}</td>
-							<td>{person.unit}</td>
-							<td>{new Date(person?.ord).toLocaleDateString()}</td>
-							<td>{person.service}</td>
-							<td>{person.vocation}</td>
-							<td>{person.team}</td>
-							<td>{person?.q_code}</td>
-							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
-							<td>{person?.currency_lvl}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{index + 1}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.name}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.nric}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.unit}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>
+								{new Date(person?.ord).toLocaleDateString()}
+							</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.service}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.vocation}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person.team}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person?.q_code}</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>
+								{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}
+							</td>
+							<td className='px-1 py-0 whitespace-nowrap border'>{person?.currency_lvl}</td>
 						</tr>
 					))}
 				</tbody>

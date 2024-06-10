@@ -121,82 +121,162 @@ export default function AuthoriseRecordsPage() {
 			<p className='text-2xl font-bold my-4 text-center'>Authorise Records Page</p>
 			<div className='flex space-x-4'>
 				<button
-					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer'
 					type='submit'
 					onClick={handleSign}>
 					Sign Selected
 				</button>
 				<button
-					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer'
 					type='submit'
 					onClick={handleDelete}>
 					Delete Selected
 				</button>
 			</div>
-			<table>
-				<thead>
+			<table className='w-full table-fixed divide-y divide-gray-200 mb-5'>
+				<thead className='bg-gray-50'>
 					<tr>
-						<th>Personnel ID</th>
-						<th>Name</th>
-						<th>Unit</th>
-						<th>Vocation</th>
-						<th>Team</th>
-						<th>Qualification Code</th>
-						<th>Qualification Type</th>
-						<th>Qualification Date</th>
-						<th>Task 1 Date</th>
-						<th>Task 2 Date</th>
-						<th>Task 3 Date</th>
-						<th>Instructor Sign-off</th>
-						<th>Instructor Timestamp</th>
-						<th>Training IC Sign-off</th>
-						<th>Training IC Timestamp</th>
-						<th>Officer-in-Charge Sign-off</th>
-						<th>Officer-in-Charge Timestamp</th>
-						<th>Select</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs sm:text-xxs font-medium text-gray-500 uppercase tracking-wider '>
+							Personnel ID
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Name
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Unit
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Vocation
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Team
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Qualification Code
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Qualification Type
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Qualification Date
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider '>
+							Task 1 Date
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Task 2 Date
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Task 3 Date
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Instructor Sign-off
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Instructor Timestamp
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Training IC Sign-off
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Training IC Timestamp
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Officer-in-Charge Sign-off
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:text-xxs sm:tracking-tighter'>
+							Officer-in-Charge Timestamp
+						</th>
+						<th
+							scope='col'
+							className='px-1 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+							Select
+						</th>
 					</tr>
 					<Filters filters={filters} setFilters={setFilters} />
 				</thead>
-				<tbody>
+				<tbody className='bg-white divide-y divide-gray-200'>
 					{filteredRecords.map((person) => (
 						<tr key={person.ath_id}>
-							<td>{person.person_id}</td>
-							<td>{person.name}</td>
-							<td>{person?.unit}</td>
-							<td>{person?.vocation}</td>
-							<td>{person?.team}</td>
-							<td>{person?.q_code}</td>
-							<td>{person?.q_type}</td>
-							<td>{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}</td>
-							<td>{person.task1 ? new Date(person.task1).toLocaleDateString() : null}</td>
-							<td>{person.task2 ? new Date(person.task2).toLocaleDateString() : null}</td>
-							<td>{person.task3 ? new Date(person.task3).toLocaleDateString() : null}</td>
-							<td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person.person_id}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person.name}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person?.unit}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person?.vocation}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person?.team}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person?.q_code}</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>{person?.q_type}</td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
+								{person.q_date ? new Date(person.q_date).toLocaleDateString() : null}
+							</td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
+								{person.task1 ? new Date(person.task1).toLocaleDateString() : null}
+							</td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
+								{person.task2 ? new Date(person.task2).toLocaleDateString() : null}
+							</td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
+								{person.task3 ? new Date(person.task3).toLocaleDateString() : null}
+							</td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>
 								{person.instructor_sign
 									? users?.find((user) => user.u_sign === person.instructor_sign).u_name
 									: null}
 							</td>
-							<td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
 								{person.instructor_ts
 									? moment.utc(person.instructor_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
-							<td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>
 								{person.trainingic_sign
 									? users?.find((user) => user.u_sign === person.trainingic_sign).u_name
 									: null}
 							</td>
-							<td>
+							<td className='px-1 py-0 whitespace-wrap border text-xs'>
 								{person.trainingic_ts
 									? moment.utc(person.trainingic_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
-							<td>
+							<td className='px-1 py-0 whitespace-nowrap border text-xs'>
 								{person.officer_sign
 									? users?.find((user) => user.u_sign === person.officer_sign).u_name
 									: null}
 							</td>
-							<td>
+							<td className='px-1 py-0 whitespace-wrap  text-xs'>
 								{person.officer_ts
 									? moment.utc(person.officer_ts).format("MMM Do YY, h:mm a")
 									: null}
@@ -206,7 +286,7 @@ export default function AuthoriseRecordsPage() {
 									? moment(person.officer_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
 									: null}
 							</td> */}
-							<td>
+							<td className='px-1 py-0 whitespace-nowrap border'>
 								<input
 									type='checkbox'
 									checked={selectedIds.includes(person.ath_id)}

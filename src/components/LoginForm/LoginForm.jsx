@@ -64,6 +64,9 @@ export default function LoginForm({ setUser, showPassword, togglePW }) {
 					Login
 				</button>
 				<div className='flex justify-start w-full text-red-600'>{error ? error : ""}</div>
+				<p className='text-s font-medium my-4 text-center'>
+					Look for Admin / OIC to Register Account
+				</p>
 			</fieldset>
 		</form>
 	);

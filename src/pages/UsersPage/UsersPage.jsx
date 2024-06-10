@@ -26,36 +26,55 @@ export default function UsersPage() {
 	return (
 		<>
 			<p className='text-2xl font-bold my-4 text-center'>Registered Users</p>
-			{isAdmin ? (
-				<button
-					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
-					type='submit'
-					onClick={() => setShowForm(!showForm)}>
-					Enroll Users
-				</button>
-			) : null}
-			{showForm ? <SignUpForm /> : null}
-
-			<table>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Unit</th>
-						<th>Appointment</th>
-					</tr>
-				</thead>
-				<tbody>
-					{users.map((user) => (
-						<tr key={user.user_id}>
-							<td>{user.u_name}</td>
-							<td>{user.u_email}</td>
-							<td>{user.u_unit}</td>
-							<td>{user.u_appt}</td>
+			<div className='flex justify-center'>
+				{isAdmin ? (
+					<button
+						className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+						type='submit'
+						onClick={() => setShowForm(!showForm)}>
+						Enroll Users
+					</button>
+				) : null}
+				{showForm ? <SignUpForm /> : null}
+			</div>
+			<div className='flex justify-center'>
+				<table className='divide-y divide-gray-200'>
+					<thead className='bg-gray-300'>
+						<tr>
+							<th
+								scope='col'
+								className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Name
+							</th>
+							<th
+								scope='col'
+								className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Email
+							</th>
+							<th
+								scope='col'
+								className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Unit
+							</th>
+							<th
+								scope='col'
+								className='px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Appointment
+							</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody className='bg-gray-100 divide-y divide-gray-200'>
+						{users.map((user) => (
+							<tr key={user.user_id}>
+								<td>{user.u_name}</td>
+								<td>{user.u_email}</td>
+								<td>{user.u_unit}</td>
+								<td>{user.u_appt}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</>
 	);
 }

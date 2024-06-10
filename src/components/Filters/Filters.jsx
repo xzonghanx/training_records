@@ -42,13 +42,13 @@ export default function Filters({ filters, setFilters }) {
 	};
 
 	return (
-		<tr>
+		<tr className='bg-gray-200 divide-y divide-gray-200'>
 			<th></th>
 			<th></th>
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='unit'
 					value={filters.unit}
 					onChange={handleFilterChange}>
@@ -63,7 +63,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='vocation'
 					value={filters.vocation}
 					onChange={handleFilterChange}>
@@ -78,7 +78,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='team'
 					value={filters.team}
 					onChange={handleFilterChange}>
@@ -93,7 +93,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='qCode'
 					value={filters.qCode}
 					onChange={handleFilterChange}>
@@ -108,7 +108,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='qType'
 					value={filters.qType}
 					onChange={handleFilterChange}>
@@ -123,7 +123,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					value={filters.sortQDate}
 					onChange={handleSortChange}>
 					<option value='asc'>Ascending</option>
@@ -136,7 +136,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='instSigningField'
 					value={filters.instSigningField}
 					onChange={handleFilterChange}>
@@ -149,7 +149,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='trgSigningField'
 					value={filters.trgSigningField}
 					onChange={handleFilterChange}>
@@ -162,7 +162,7 @@ export default function Filters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs sm:text-xxs sm:tracking-tighter'
 					name='offSigningField'
 					value={filters.offSigningField}
 					onChange={handleFilterChange}>

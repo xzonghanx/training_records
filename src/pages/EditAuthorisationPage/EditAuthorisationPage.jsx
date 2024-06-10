@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Outlet } from "react-router-dom";
 import AuthorisationForm from "../../components/AuthorisationForm/AuthorisationForm";
 import { fetchOneAuthorisationRecord, deleteRecord } from "../../utilities/authorisation-service";
-import Teams from "../../components/Teams/Teams";
 import moment from "moment-timezone";
 import debug from "debug";
 const log = debug("pern:pages:EditAuthorisationPage");
@@ -38,15 +37,21 @@ export default function EditAuthorisationPage() {
 	return (
 		<>
 			<p className='text-2xl font-bold my-4 text-center'>Edit Authorisation Page</p>
+			<div className='flex justify-center'>
+				<button
+					type='submit'
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					onClick={handleDelete}>
+					DELETE Record
+				</button>
+			</div>
 			<AuthorisationForm
 				authRecords={authRecords}
 				setAuthRecords={setAuthRecords}
 				personId={personId}
 				athId={athId}
 			/>
-			<br />
-			<button onClick={handleDelete}>DELETE Record</button>
-			<Teams />
+			<Outlet />
 		</>
 	);
 }

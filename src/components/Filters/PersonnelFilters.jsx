@@ -36,14 +36,14 @@ export default function PersonnelFilters({ filters, setFilters }) {
 	};
 
 	return (
-		<tr>
+		<tr className='bg-gray-200 divide-y divide-gray-200'>
 			<th></th>
 			<th></th>
 			<th></th>
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='unit'
 					value={filters.unit}
 					onChange={handleFilterChange}>
@@ -59,7 +59,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='service'
 					value={filters.service}
 					onChange={handleFilterChange}>
@@ -74,7 +74,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='vocation'
 					value={filters.vocation}
 					onChange={handleFilterChange}>
@@ -89,7 +89,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='team'
 					value={filters.team}
 					onChange={handleFilterChange}>
@@ -104,7 +104,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='qCode'
 					value={filters.qCode}
 					onChange={handleFilterChange}>
@@ -120,7 +120,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th>
 				<select
 					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
-				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 h-5'
 					name='currencyLvl'
 					value={filters.currencyLvl}
 					onChange={handleFilterChange}>
