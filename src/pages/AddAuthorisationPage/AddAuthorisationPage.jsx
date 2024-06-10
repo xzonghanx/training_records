@@ -10,7 +10,7 @@ export default function AddAuthorisationPage() {
 
 	return (
 		<>
-			<h1>Add Authorisation Page</h1>
+			<p className='text-2xl font-bold my-4 text-center'>Add Authorisation Page</p>
 			<AuthorisationForm
 				authRecords={authRecords}
 				setAuthRecords={setAuthRecords}

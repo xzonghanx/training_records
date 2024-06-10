@@ -1,3 +1,4 @@
+import "../../../index.css";
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthPage from "../AuthPage/AuthPage";
@@ -19,7 +20,7 @@ const log = debug("pern:pages:App:App");
 
 function App() {
 	const [user, setUser] = useState(getUser());
-	const isAdmin = user?.u_appt === "admin" || "oic";
+	const isAdmin = user?.u_appt === "oic" || user?.u_appt === "admin";
 	log("user %o", user);
 	const [showTimeout, setShowTimeout] = useState(false);
 

@@ -7,7 +7,7 @@ const log = debug("pern:pages:UsersPage");
 
 export default function UsersPage() {
 	const user = getUser();
-	const isAdmin = user.u_appt === ("admin" || "oic");
+	const isAdmin = user?.u_appt === "oic" || user?.u_appt === "admin";
 	const [users, setUsers] = useState([]);
 	const [showForm, setShowForm] = useState(false);
 
@@ -25,8 +25,15 @@ export default function UsersPage() {
 
 	return (
 		<>
-			<h1>Registered Users</h1>
-			{isAdmin ? <button onClick={() => setShowForm(!showForm)}>Enroll users</button> : null}
+			<p className='text-2xl font-bold my-4 text-center'>Registered Users</p>
+			{isAdmin ? (
+				<button
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					type='submit'
+					onClick={() => setShowForm(!showForm)}>
+					Enroll Users
+				</button>
+			) : null}
 			{showForm ? <SignUpForm /> : null}
 
 			<table>

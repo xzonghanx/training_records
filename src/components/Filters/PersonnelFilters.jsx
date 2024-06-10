@@ -41,7 +41,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			<th></th>
 			<th></th>
 			<th>
-				<select name='unit' value={filters.unit} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='unit'
+					value={filters.unit}
+					onChange={handleFilterChange}>
 					<option value=''>All Units</option>
 					{filterOptions.unitOptions.map((option) => (
 						<option key={option.unit} value={option.unit}>
@@ -52,7 +57,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			</th>
 			<th></th>
 			<th>
-				<select name='service' value={filters.service} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='service'
+					value={filters.service}
+					onChange={handleFilterChange}>
 					<option value=''>All Service Type</option>
 					{filterOptions.serviceOptions.map((option) => (
 						<option key={option.service} value={option.service}>
@@ -62,7 +72,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 				</select>
 			</th>
 			<th>
-				<select name='vocation' value={filters.vocation} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='vocation'
+					value={filters.vocation}
+					onChange={handleFilterChange}>
 					<option value=''>All Vocations</option>
 					{filterOptions.vocationOptions.map((option) => (
 						<option key={option.vocation} value={option.vocation}>
@@ -72,7 +87,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 				</select>
 			</th>
 			<th>
-				<select name='team' value={filters.team} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='team'
+					value={filters.team}
+					onChange={handleFilterChange}>
 					<option value=''>All Teams</option>
 					{filterOptions.teamOptions.map((option) => (
 						<option key={option.team} value={option.team}>
@@ -82,7 +102,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 				</select>
 			</th>
 			<th>
-				<select name='qCode' value={filters.qCode} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='qCode'
+					value={filters.qCode}
+					onChange={handleFilterChange}>
 					<option value=''>All Q Codes</option>
 					{filterOptions.qCodeOptions.map((option) => (
 						<option key={option.q_code} value={option.q_code}>
@@ -93,7 +118,12 @@ export default function PersonnelFilters({ filters, setFilters }) {
 			</th>
 			<th></th>
 			<th>
-				<select name='currencyLvl' value={filters.currencyLvl} onChange={handleFilterChange}>
+				<select
+					className='border-opacity-60 border-slate-500 ring-offset-background focus-visible:ring-ring flex
+				text-left rounded-md border text-xs file:border-0 file:bg-transparent file:text-xs file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 h-5'
+					name='currencyLvl'
+					value={filters.currencyLvl}
+					onChange={handleFilterChange}>
 					<option value=''>All Currency Lvls</option>
 					{filterOptions.currencyLvlOptions.map((option) => (
 						<option key={option.currency_Lvl} value={option.currency_lvl}>

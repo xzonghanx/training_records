@@ -32,8 +32,10 @@ const UserTimeout = ({ setUser, children, setShowTimeout }) => {
 	if (!user) {
 		return (
 			<div>
-				<h2>You are not logged in</h2>
-				<h3>redirecting to login page in {countdown} seconds...</h3>
+				<p className='text-xl font-bold my-4 text-center'>You are not logged in</p>
+				<p className='text-l font-bold my-4 text-center'>
+					redirecting to login page in {countdown} seconds...
+				</p>
 			</div>
 		);
 	}

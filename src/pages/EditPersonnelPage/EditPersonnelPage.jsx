@@ -31,9 +31,11 @@ export default function EditPersonnelPage() {
 
 	return (
 		<>
-			<h1>Edit Personnel Page</h1>
-			<PersonnelForm person={person} setPerson={setPerson} personId={personId} />
-			<Teams />
+			<p className='text-2xl font-bold my-4 text-center'>Edit Personnel Page</p>
+			<div className='flex justify-center items-center space-x-1 w-full'>
+				<PersonnelForm person={person} setPerson={setPerson} personId={personId} />
+				<Teams />
+			</div>
 		</>
 	);
 }

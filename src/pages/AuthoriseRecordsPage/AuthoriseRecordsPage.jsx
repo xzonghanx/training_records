@@ -118,9 +118,21 @@ export default function AuthoriseRecordsPage() {
 
 	return (
 		<>
-			<h1>Authorise Records page</h1>
-			<button onClick={handleSign}>Sign Selected</button>
-			<button onClick={handleDelete}>Delete Selected</button>
+			<p className='text-2xl font-bold my-4 text-center'>Authorise Records Page</p>
+			<div className='flex space-x-4'>
+				<button
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					type='submit'
+					onClick={handleSign}>
+					Sign Selected
+				</button>
+				<button
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					type='submit'
+					onClick={handleDelete}>
+					Delete Selected
+				</button>
+			</div>
 			<table>
 				<thead>
 					<tr>

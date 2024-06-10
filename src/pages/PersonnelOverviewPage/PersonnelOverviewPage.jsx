@@ -61,13 +61,18 @@ export default function PersonnelOverviewPage() {
 
 	return (
 		<>
-			<h1>Personnel Overview page</h1>
+			<p className='text-2xl font-bold my-4 text-center'>Personnel Overview Page</p>
 
 			<div>
-				<Link to='/personnel/new'>Create New Personnel</Link>
+				<button
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					type='submit'>
+					<Link to='/personnel/new'>Create New Personnel</Link>
+				</button>
 			</div>
 			<br />
 			<input
+				className='border-opacity-60 border-slate-500 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-2 w-1/6 rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 my-2'
 				type='text'
 				placeholder='Search by Name or NRIC'
 				value={searchQuery}

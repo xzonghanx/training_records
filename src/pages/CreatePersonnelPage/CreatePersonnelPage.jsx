@@ -9,9 +9,11 @@ export default function CreatePersonnelPage() {
 
 	return (
 		<>
-			<h1>Create Personnel Page</h1>
-			<PersonnelForm person={person} setPerson={setPerson} />
-			<Teams />
+			<p className='text-2xl font-bold my-4 text-center'>Create Personnel Page</p>
+			<div className='flex justify-center items-center space-x-1 w-full'>
+				<PersonnelForm person={person} setPerson={setPerson} />
+				<Teams />
+			</div>
 		</>
 	);
 }

@@ -37,7 +37,7 @@ export default function EditAuthorisationPage() {
 
 	return (
 		<>
-			<h1>Edit Authorisation Page</h1>
+			<p className='text-2xl font-bold my-4 text-center'>Edit Authorisation Page</p>
 			<AuthorisationForm
 				authRecords={authRecords}
 				setAuthRecords={setAuthRecords}

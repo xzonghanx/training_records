@@ -9,7 +9,8 @@ const log = debug("pern:pages:QualificationsPage");
 export default function QualificationsPage() {
 	const [qualifications, setQualifications] = useState([]);
 	const user = getUser();
-	const isAdmin = user?.u_appt === ("oic" || "admin");
+	const isAdmin = user?.u_appt === "oic" || user?.u_appt === "admin";
+	// log(isAdmin);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -30,10 +31,15 @@ export default function QualificationsPage() {
 
 	return (
 		<>
-			<h1>Qualifications Chart</h1>
+			<p className='text-2xl font-bold my-4 text-center'>Qualification Chart</p>
 
 			{isAdmin ? (
-				<button onClick={() => navigate("/qualifications/new")}>add courses</button>
+				<button
+					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+					type='submit'
+					onClick={() => navigate("/qualifications/new")}>
+					Add Courses
+				</button>
 			) : null}
 
 			<table>

@@ -14,7 +14,7 @@ export default function AmendQualificationsPage() {
 	const navigate = useNavigate();
 	const { q_id } = useParams();
 	const user = getUser();
-	const isAdmin = user?.u_appt === ("admin" || "oic"); //IF NOT ADMIN, REDIRECT AWAY?
+	const isAdmin = user?.u_appt === "oic" || user?.u_appt === "admin";
 	// log(user);
 	// log(isAdmin);
 
@@ -54,6 +54,7 @@ export default function AmendQualificationsPage() {
 
 	return (
 		<>
+			<p className='text-2xl font-bold my-4 text-center'>Amend Qualification Page</p>
 			<form
 				onSubmit={(e) => {
 					handleSave(e);

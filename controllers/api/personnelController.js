@@ -52,29 +52,6 @@ const search = async (req, res) => {
 	}
 };
 
-/*
-const currency = async (req, res) => {
-	try {
-		let query = `
-			SELECT a.p_id, MAX(a.q_date) as latest_q_date,
-			CASE
-				WHEN (CURRENT_DATE - MAX(a.q_date)) < 365 THEN 'CL1'
-				WHEN (CURRENT_DATE - MAX(a.q_date)) < 730 THEN 'CL2'
-				WHEN (CURRENT_DATE - MAX(a.q_date)) < 1095 THEN 'CL3'
-				ELSE 'lapse'
-			END AS currency_level
-			FROM authorisation a
-			GROUP BY a.p_id
-		`;
-		const result = await pool.query(query);
-		res.status(200).json(result.rows);
-	} catch (err) {
-		console.error("Error executing query", err.stack);
-		res.status(500).json({ err });
-	}
-};
-*/
-
 const teams = async (req, res) => {
 	try {
 		const query = `
@@ -203,28 +180,6 @@ const removeMany = async (req, res) => {
 	}
 };
 
-//TODO change update ORD to just by date for all, and auto if possible, instead of by batch/team; can use nodejs cron.
-const updateORD = async (req, res) => {
-	try {
-		const { team } = req.body;
-		const query = `
-		UPDATE personnel
-		SET service = 
-			CASE
-				WHEN ord < CURRENT_DATE 
-				THEN 'NSmen'
-				ELSE service
-			END
-		WHERE team = $1
-		RETURNING *`;
-		const result = await pool.query(query, [team]);
-		res.status(200).json(result.rows);
-	} catch (err) {
-		console.error("Error executing query", err.stack);
-		res.status(500).json({ err });
-	}
-};
-
 module.exports = {
 	create,
 	index,
@@ -233,7 +188,5 @@ module.exports = {
 	edit,
 	removeOne,
 	removeMany,
-	updateORD,
-	// currency,
 	teams,
 };
