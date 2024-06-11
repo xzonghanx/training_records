@@ -28,7 +28,7 @@ export default function AuthorisationForm({ authRecords, setAuthRecords, personI
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
 		data.personId = personId;
-		log("data, %o", data);
+		// log("data, %o", data);
 		try {
 			if (athId) {
 				const response = await editAuthorisation(athId, data);

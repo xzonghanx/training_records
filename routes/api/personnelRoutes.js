@@ -15,6 +15,3 @@ router.delete("/:id", [ensureLoggedIn], personCtrl.removeOne);
 router.put("/:id", [ensureLoggedIn], personCtrl.edit);
 
 module.exports = router;
-
-// router.get("/currency", personCtrl.currency);
-// router.patch("/ORD", personCtrl.updateORD); //testing --> should try to automate this instead

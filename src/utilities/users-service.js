@@ -1,7 +1,7 @@
 import * as usersAPI from "./users-api";
 
-import debug from "debug";
-const log = debug("pern:utilities:users-service");
+// import debug from "debug";
+// const log = debug("pern:utilities:users-service");
 
 export function getToken() {
 	const token = localStorage.getItem("token");
@@ -20,9 +20,9 @@ export function getUser() {
 }
 
 export const signUp = async (userData) => {
-	log("userData: %o", userData);
+	// log("userData: %o", userData);
 	const signedUp = await usersAPI.signUp(userData);
-	log("signedUp: %o", signedUp);
+	// log("signedUp: %o", signedUp);
 	return signedUp;
 
 	// const token = await usersAPI.signUp(userData);
@@ -36,11 +36,11 @@ export const logOut = () => {
 };
 
 export const login = async (email, password) => {
-	log("%s, %s", email, password);
+	// log("%s, %s", email, password);
 	const user = { email, password };
 
 	const token = await usersAPI.login(user);
-	log("token: %o", token);
+	// log("token: %o", token);
 	localStorage.setItem("token", token);
 	return getUser();
 };

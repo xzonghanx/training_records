@@ -18,7 +18,7 @@ export default function PersonnelFilters({ filters, setFilters }) {
 		const getFilterOptions = async () => {
 			try {
 				const data = await fetchFilterOptions();
-				log(data);
+				// log(data);
 				setFilterOptions(data);
 			} catch (error) {
 				log("error getting filter options", error);

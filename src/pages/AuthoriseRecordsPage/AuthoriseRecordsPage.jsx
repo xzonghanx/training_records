@@ -96,11 +96,11 @@ export default function AuthoriseRecordsPage() {
 				? prevSelectedIds.filter((selectedId) => selectedId !== id)
 				: [...prevSelectedIds, id]
 		);
-		log("selectedIDs", selectedIds);
+		// log("selectedIDs", selectedIds);
 	};
 
 	const handleSign = async () => {
-		log("selectedIds, %o", selectedIds);
+		// log("selectedIds, %o", selectedIds);
 		const athId = selectedIds;
 		const response = await signRecord({ athId, user });
 		log("signed, %o", response);
@@ -109,7 +109,7 @@ export default function AuthoriseRecordsPage() {
 	};
 
 	const handleDelete = async () => {
-		log("selectedIds, %o", selectedIds);
+		// log("selectedIds, %o", selectedIds);
 		const athId = selectedIds;
 		const response = await deleteRecords({ athId });
 		log("signed, %o", response);
@@ -281,11 +281,7 @@ export default function AuthoriseRecordsPage() {
 									? moment.utc(person.officer_ts).format("MMM Do YY, h:mm a")
 									: null}
 							</td>
-							{/* <td>
-								{person.officer_ts
-									? moment(person.officer_ts).tz("Asia/Singapore").format("MMM Do YY, h:mm a")
-									: null}
-							</td> */}
+
 							<td className='px-1 py-0 whitespace-nowrap border'>
 								<input
 									type='checkbox'

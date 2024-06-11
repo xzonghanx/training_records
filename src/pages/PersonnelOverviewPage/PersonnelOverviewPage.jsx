@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { fetchSearchedPersonnel } from "../../utilities/personnel-service";
 import PersonnelFilters from "../../components/Filters/PersonnelFilters";
+import ExcelReader from "../../components/ExcelReader/ExcelReader";
 
 import debug from "debug";
 const log = debug("pern:pages:PersonnelOverviewPage");
@@ -42,7 +43,7 @@ export default function PersonnelOverviewPage() {
 		const getSearchPersonnel = async () => {
 			try {
 				const data = await fetchSearchedPersonnel(searchQuery);
-				log("fetchSearchedPersonnel: %o", data);
+				// log("fetchSearchedPersonnel: %o", data);
 				setAllPersonnel(data);
 			} catch (error) {
 				log("error fetching searched personnel", error);
@@ -62,13 +63,15 @@ export default function PersonnelOverviewPage() {
 	return (
 		<>
 			<p className='text-2xl font-bold my-4 text-center'>Personnel Overview Page</p>
-
-			<div>
-				<button
-					className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
-					type='submit'>
-					<Link to='/personnel/new'>Create New Personnel</Link>
-				</button>
+			<div className='inline-flex w-full justify-between'>
+				<div>
+					<button
+						className='ring-offset-background focus-visible:ring-ring flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-gray-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
+						type='submit'>
+						<Link to='/personnel/new'>Create New Personnel</Link>
+					</button>
+				</div>
+				<ExcelReader />
 			</div>
 			<br />
 			<input

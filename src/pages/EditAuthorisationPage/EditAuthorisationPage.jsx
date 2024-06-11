@@ -15,7 +15,7 @@ export default function EditAuthorisationPage() {
 		const getOneAuthorisationRecord = async () => {
 			try {
 				const data = await fetchOneAuthorisationRecord(athId);
-				log("getOneAuthorisationRecord: %o", data);
+				// log("getOneAuthorisationRecord: %o", data);
 				data.q_date = moment(data.q_date).tz("Asia/Singapore").format().split("T")[0];
 				data.task1 = moment(data.task1).tz("Asia/Singapore").format().split("T")[0];
 				data.task2 = moment(data.task2).tz("Asia/Singapore").format().split("T")[0];
@@ -29,7 +29,6 @@ export default function EditAuthorisationPage() {
 	}, [athId]);
 
 	const handleDelete = async () => {
-		log("handle delete");
 		await deleteRecord(athId);
 		navigate(`/personnel/${personId}`);
 	};

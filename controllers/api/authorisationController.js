@@ -40,15 +40,9 @@ const show = async (req, res) => {
 	}
 };
 
-//TODO
-// ALL supervisors can create. but last user can edit before signing.
-// lock edit button in front end after sign???
-// edit means re-sign; need to set IF condition to see who update/sign --> trainingIC or OIC.
-// any edit will remove existing signature?
-
 const edit = async (req, res) => {
 	try {
-		const { athId } = req.params; //personnelID
+		const { athId } = req.params; 
 		const { q_code, q_type, q_date, task1, task2, task3 } = req.body;
 		const query = `
 			UPDATE authorisation SET
@@ -84,22 +78,15 @@ const sign = async (req, res) => {
 	}
 
 	try {
-		// debug("signer", signer);
-		// const query = `
-		// 	UPDATE authorisation SET
-		// 	${signer}_sign=$1,
-		// 	${signer}_ts=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore'
-		// 	WHERE ath_id=$2
-		// 	RETURNING *`;
 		const query = `
 			UPDATE authorisation SET
 			${signer}_sign=$1,
 			${signer}_ts=CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Singapore'
 			WHERE ath_id=ANY($2::int[])
 			RETURNING *`;
-		//might have conflict between date UTC timezone and SG timezone
+
 		const values = [user.u_sign, athId];
-		// const values = [user.u_name, athId]; //TODO switch to this after amending schema
+
 		const result = await pool.query(query, values);
 		debug("result", result.rows[0]);
 		res.status(200).json(result.rows);

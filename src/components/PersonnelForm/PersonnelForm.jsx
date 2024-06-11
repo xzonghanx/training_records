@@ -14,7 +14,7 @@ export default function PersonnelForm({ person, setPerson, personId }) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
-		log("data, %o", data);
+		// log("data, %o", data);
 		try {
 			if (personId) {
 				const response = await editPerson(data, personId);

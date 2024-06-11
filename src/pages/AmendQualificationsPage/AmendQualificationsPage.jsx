@@ -41,7 +41,7 @@ export default function AmendQualificationsPage() {
 		const formData = new FormData(e.target);
 		const data = Object.fromEntries(formData);
 		data.user = user.u_appt; //passed u_appt to validate in server.
-		log("data, %o", data);
+		// log("data, %o", data);
 		if (q_id) {
 			const response = await editQualification(q_id, data);
 			log("edit response, %o", response);

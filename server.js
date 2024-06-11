@@ -19,6 +19,7 @@ app.use("/api/users", require("./routes/api/usersRoutes"));
 app.use("/api/personnel", require("./routes/api/personnelRoutes"));
 app.use("/api/authorisation", require("./routes/api/authorisationRoutes"));
 app.use("/api/qualification", require("./routes/api/qualificationRoutes"));
+app.use("/api/excel", require("./routes/api/excelRoutes"));
 
 // The following "catch all" route (note the *) is necessary to return the index.html on all non-AJAX requests
 app.get("/*", function (req, res) {

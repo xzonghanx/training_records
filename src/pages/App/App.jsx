@@ -15,13 +15,13 @@ import UsersPage from "../UsersPage/UsersPage";
 import NavBar from "../../../src/components/NavBar/NavBar";
 import UserTimeout from "../../components/UserTimeout/UserTimeout";
 import { getUser } from "../../utilities/users-service";
-import debug from "debug";
-const log = debug("pern:pages:App:App");
+// import debug from "debug";
+// const log = debug("pern:pages:App:App");
 
 function App() {
 	const [user, setUser] = useState(getUser());
 	const isAdmin = user?.u_appt === "oic" || user?.u_appt === "admin";
-	log("user %o", user);
+	// log("user %o", user);
 	const [showTimeout, setShowTimeout] = useState(false);
 
 	return (
@@ -77,29 +77,6 @@ function App() {
 									)
 								}
 							/>
-							{/* <Route path='/personnel' element={<PersonnelOverviewPage />} />
-							<Route path='/personnel/new' element={<CreatePersonnelPage />}>
-								<Route path='' element={<TeamsPage />} />
-							</Route>
-							<Route path='/personnel/:personId' element={<PersonnelDetailsPage />} />
-							<Route path='/personnel/:personId/edit' element={<EditPersonnelPage />}>
-								<Route path='' element={<TeamsPage />} />
-							</Route>
-							<Route path='/authorisation' element={<AuthoriseRecordsPage />} />
-							<Route
-								path='/personnel/:personId/authorisation/new'
-								element={<AddAuthorisationPage />}>
-								<Route path='' element={<QualificationsPage />} />
-							</Route>
-							<Route
-								path='/personnel/:personId/authorisation/:athId'
-								element={<EditAuthorisationPage />}>
-								<Route path='' element={<QualificationsPage />} />
-							</Route>
-							<Route path='/qualifications' element={<QualificationsPage />} />
-							<Route path='/qualifications/new' element={<AmendQualificationsPage />} />
-							<Route path='/qualifications/:q_id/edit' element={<AmendQualificationsPage />} />
-							<Route path='/users' element={<UsersPage />} /> */}
 						</Routes>
 					</>
 				) : (

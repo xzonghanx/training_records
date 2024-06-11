@@ -19,7 +19,7 @@ export default function PersonnelDetailsPage() {
 		const getPersonnel = async () => {
 			try {
 				const data = await fetchOnePersonnel(personId);
-				log("getOnePersonnel: %o", data);
+				// log("getOnePersonnel: %o", data);
 				setPersonnel(data);
 			} catch (error) {
 				log("error getting person details", error);
@@ -39,7 +39,6 @@ export default function PersonnelDetailsPage() {
 	}, [personId]);
 
 	const handleDelete = async () => {
-		log("handle delete");
 		await deleteOnePerson(personId);
 		navigate(`/personnel`);
 	};

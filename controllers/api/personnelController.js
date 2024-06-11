@@ -97,13 +97,6 @@ const show = async (req, res) => {
 	`;
 		const values = [id];
 		const result = await pool.query(query, values);
-		// const result = await pool.query(
-		// 	`SELECT * FROM personnel p
-		// 	LEFT JOIN authorisation a
-		// 	ON p.person_id = a.p_id
-		// 	WHERE p.person_id = $1`,
-		// 	[id]
-		// );
 		if (result.rows.length > 0) {
 			res.status(200).json(result.rows);
 		} else {

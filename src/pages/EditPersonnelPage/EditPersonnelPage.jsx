@@ -20,7 +20,7 @@ export default function EditPersonnelPage() {
 				const ordDate = moment(datum.ord).tz("Asia/Singapore").format().split("T")[0];
 				// log("newdate %s", ordDate);
 				datum.ord = ordDate;
-				log("datum: %o", datum);
+				// log("datum: %o", datum);
 				setPerson(datum);
 			} catch (error) {
 				log("error getting person details", error);

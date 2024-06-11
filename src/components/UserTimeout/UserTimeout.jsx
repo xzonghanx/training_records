@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
-import debug from "debug";
-const log = debug("pern:components:UserTimeout");
+// import debug from "debug";
+// const log = debug("pern:components:UserTimeout");
 
 const UserTimeout = ({ setUser, children, setShowTimeout }) => {
 	const navigate = useNavigate();
@@ -10,7 +10,7 @@ const UserTimeout = ({ setUser, children, setShowTimeout }) => {
 	const user = getUser();
 
 	useEffect(() => {
-		log("user %o:", user);
+		// log("user %o:", user);
 		if (!user) {
 			const timer = setInterval(() => {
 				setCountdown((prev) => prev - 1);
